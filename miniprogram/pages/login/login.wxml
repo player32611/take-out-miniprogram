@@ -1,0 +1,4 @@
+<view class="container">
+    <text>微信授权登录</text>
+    <button bind:tap="login">点击登录</button>
+</view>

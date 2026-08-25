@@ -1,28 +1,38 @@
-<!--index.wxml-->
-<navigation-bar title="Weixin" back="{{false}}" color="black" background="#FFF"></navigation-bar>
-<scroll-view class="scrollarea" scroll-y type="list">
-  <view class="container">
-    <view class="userinfo">
-      <block wx:if="{{canIUseNicknameComp && !hasUserInfo}}">
-        <button class="avatar-wrapper" open-type="chooseAvatar" bind:chooseavatar="onChooseAvatar">
-          <image class="avatar" src="{{userInfo.avatarUrl}}"></image>
-        </button>
-        <view class="nickname-wrapper">
-          <text class="nickname-label">昵称</text>
-          <input type="nickname" class="nickname-input" placeholder="请输入昵称" bind:change="onInputChange" />
+<view class="container">
+    <view class="menu">
+        <shop-detail></shop-detail>
+        <view class="list">
+            <scroll-view class="category-list" scroll-y>
+                <view class="category-list-item">A</view>
+                <view class="category-list-item active">A</view>
+                <view class="category-list-item">A</view>
+                <view class="category-list-item">A</view>
+                <view class="category-list-item">A</view>
+                <view class="category-list-item">A</view>
+                <view class="category-list-item">A</view>
+                <view class="category-list-item">A</view>
+                <view class="category-list-item">A</view>
+                <view class="category-list-item">A</view>
+                <view class="category-list-item">A</view>
+                <view class="category-list-item">A</view>
+                <view class="category-list-item">A</view>
+                <view class="category-list-item">A</view>
+                <view class="category-list-item">A</view>
+            </scroll-view>
+
+            <scroll-view class="product-list" scroll-y>
+                <view class="product-list-item"> A </view>
+                <view class="product-list-item"> A </view>
+                <view class="product-list-item"> A </view>
+                <view class="product-list-item"> A </view>
+                <view class="product-list-item"> A </view>
+            </scroll-view>
         </view>
-      </block>
-      <block wx:elif="{{!hasUserInfo}}">
-        <button wx:if="{{canIUseGetUserProfile}}" bindtap="getUserProfile"> 获取头像昵称 </button>
-        <view wx:else> 请使用2.10.4及以上版本基础库 </view>
-      </block>
-      <block wx:else>
-        <image bindtap="bindViewTap" class="userinfo-avatar" src="{{userInfo.avatarUrl}}" mode="cover"></image>
-        <text class="userinfo-nickname">{{userInfo.nickName}}</text>
-      </block>
+        <!-- <button bind:tap="handleLogin">登录</button> -->
     </view>
-    <view class="usermotto">
-      <text class="user-motto">{{motto}}</text>
-    </view>
-  </view>
-</scroll-view>
+</view>
+
+<cart-bar></cart-bar>
+  
+
+

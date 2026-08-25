@@ -1,0 +1,4 @@
+<!--components/shop-detail/shop-detail.wxml-->
+<view class="shop-detail">
+    <text>详情</text>
+</view>

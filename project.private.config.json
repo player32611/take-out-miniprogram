@@ -1,8 +1,8 @@
 {
-    "libVersion": "2.32.3",
+    "libVersion": "3.16.2",
     "projectname": "take-out-miniprogram",
     "setting": {
-        "urlCheck": true,
+        "urlCheck": false,
         "coverView": false,
         "lazyloadPlaceholderEnable": false,
         "skylineRenderEnable": true,
