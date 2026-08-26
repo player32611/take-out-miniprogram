@@ -74,11 +74,11 @@ Page({
         if (res.code) {
             userLogin({code: res.code}).then(response => {
                 const token = response.data.token;
-                wx.setStorageSync("token", token)
+                wx.setStorageSync("authorization", token)
                 wx.hideLoading();
                 wx.showToast({title: MESSAGE.LOGIN_SUCCESS});
                 setTimeout(()=>{
-                    wx.navigateTo({url: "/pages/index/index"})
+                    wx.redirectTo({url: "/pages/index/index" })
                 }, 1000)
             }).catch(()=>{
                 wx.hideLoading();

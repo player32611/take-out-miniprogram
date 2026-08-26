@@ -3,29 +3,29 @@
         <shop-detail></shop-detail>
         <view class="list">
             <scroll-view class="category-list" scroll-y>
-                <view class="category-list-item">A</view>
-                <view class="category-list-item active">A</view>
-                <view class="category-list-item">A</view>
-                <view class="category-list-item">A</view>
-                <view class="category-list-item">A</view>
-                <view class="category-list-item">A</view>
-                <view class="category-list-item">A</view>
-                <view class="category-list-item">A</view>
-                <view class="category-list-item">A</view>
-                <view class="category-list-item">A</view>
-                <view class="category-list-item">A</view>
-                <view class="category-list-item">A</view>
-                <view class="category-list-item">A</view>
-                <view class="category-list-item">A</view>
-                <view class="category-list-item">A</view>
+                <view class="category-list-item {{ item.id === selectCategory.id ? 'active' : '' }}"   wx:for="{{ categoryList }}" wx:key="id" bind:tap="handleChangeCategory" data-category="{{ item }}">
+                    {{ item.name }}
+                </view>
             </scroll-view>
 
             <scroll-view class="product-list" scroll-y>
-                <view class="product-list-item"> A </view>
-                <view class="product-list-item"> A </view>
-                <view class="product-list-item"> A </view>
-                <view class="product-list-item"> A </view>
-                <view class="product-list-item"> A </view>
+                <view class="product-list-item" wx:for="{{ productList }}" wx:key="id" bind:tap="handleOpenProductModal" data-record="{{ item }}">
+                    <image class="product-list-item-image" src="{{ item.image }}" alt="{{ item.name }}" mode="aspectFill"/>
+                    <view class="product-list-item-name">{{ item.name }}</view>
+                    <view class="product-list-item-description">{{ item.description }}</view>
+                    <view class="product-list-item-bottom">
+                        <view class="product-list-item-price">
+                            <text class="price-icon">￥</text>
+                            <text>{{ item.price }}</text>
+                        </view>
+                        <view wx:if="{{ item.flavors.length }}" class="product-list-item-select" 
+                        bind:tap="handleAddProduct" data-id="{{ item.id }}" data-flavors="{{ item.flavors }}">
+                            选择规格
+                        </view>
+                        <image wx:else class="icon product-list-item-add" 
+                        src="/styles/icon/add.svg" catch:tap="handleAddProduct" data-id="{{ item.id }}"/>
+                    </view>
+                </view>
             </scroll-view>
         </view>
         <!-- <button bind:tap="handleLogin">登录</button> -->
@@ -33,6 +33,8 @@
 </view>
 
 <cart-bar></cart-bar>
+
+<product-modal wx:if="{{ productModalOpen }}" record="{{ currentProduct }}" type="{{ selectCategory.type }}" bind:close="handleCloseProductModal"></product-modal>
   
 
 

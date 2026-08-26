@@ -6,29 +6,65 @@ export function request<TRequest, TResponse>(
   options: RequestOptions<TRequest>
 ): Promise<Response<TResponse>> {
   return new Promise((resolve, reject) => {
-    wx.request<Response<TResponse>>({
-      url: BASE_URL + options.url,
-      method,
-      data: options.params,
-      header: {
+    const authorization = wx.getStorageSync("authorization")
+
+    const header: Record<string, string> = {
         'Content-Type': 'application/json',
         ...options.header
-      },
-      timeout: options.timeout,
+      }
+  
+    if (authorization) {
+        header['Authorization'] = authorization;
+    }
 
-      success(res) {
-        if (res.statusCode >= 200 && res.statusCode < 300) {
-          resolve(res.data)
-        } else {
-          reject({
-            statusCode: res.statusCode,
-            data: res.data
-          })
-        }
-      },
+    wx.request<Response<TResponse>>({
+        url: BASE_URL + options.url,
+        method,
+        data: options.params,
+        header,
+        timeout: options.timeout,
 
-      fail(error) {
-        reject(error)
+        success(res) {
+            if (res.statusCode === 401) {
+                wx.removeStorageSync('authorization')
+
+                wx.showToast({
+                    title: '登录已过期',
+                    icon: 'none'
+                })
+                setTimeout(()=>{
+                    wx.hideToast();
+                    wx.navigateTo({url: "/pages/login/login"});
+                }, 1000)
+
+                reject(new Error('登录已过期'))
+                return
+            }
+
+            if (res.statusCode >= 200 && res.statusCode < 300) {
+                const result = res.data
+
+                if (result.code === 200) {
+                    resolve(result)
+                } else {
+                    wx.showToast({
+                        title: result.msg || '请求失败',
+                        icon: 'none'
+                    })
+                    reject(new Error(result.msg))
+                }
+                return
+            }
+            reject(new Error(`HTTP ${res.statusCode}`))
+        },
+
+        fail(err) {
+            console.error('网络请求失败：', err)
+            wx.showToast({
+                title: '网络异常',
+                icon: 'none'
+            })
+            reject(err)
       }
     })
   })

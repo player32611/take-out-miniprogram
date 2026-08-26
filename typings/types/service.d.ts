@@ -1,3 +1,5 @@
+import { Category, DishVO, Setmeal, SetmealDishVO } from "./common"
+
 export interface Response<T = unknown> {
 	code: number;
 	data: T;
@@ -13,11 +15,35 @@ export interface RequestOptions<T = unknown> {
   
 export type HttpMethod = 'GET' | 'POST' | 'PUT' | 'DELETE'
 
+export interface CategoryListParams {
+    type?: number
+}
+
+export type CategoryListResponse = Category[]
+
 export interface UserLoginParams {
     code: string
 }
 
-export interface UserLoginData {
+export interface DishListParams {
+    categoryId: number;
+}
+
+export type DishListResponse = DishVO[]
+
+export interface SetmealListParams {
+    categoryId: number;
+}
+
+export type SetmealListResponse = Setmeal[]
+
+export interface SetmealDishParams {
+    id: number;
+}
+
+export type SetmealDishResponse = SetmealDishVO[]
+
+export interface UserLoginResponse {
     id: number;
     openid: string;
     token: string;

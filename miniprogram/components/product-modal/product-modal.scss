@@ -1,0 +1,69 @@
+/* components/product-modal/product-modal.wxss */
+.mask{
+    position: absolute;
+    top: 0;
+    left: 0;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    width: 100vw;
+    background-color: #00000080;
+
+    .product-modal{
+        position: relative;
+        padding: 20px;
+        display: flex;
+        flex-direction: column;
+        height: 50vh;
+        width: 70%;
+        background-color: #ffffff;
+        border-top-left-radius: 20px;
+        border-top-right-radius: 20px;
+        z-index: 50;
+
+        .product-modal-image{
+            width: 100%;
+        }
+
+        .product-modal-name{
+            width: 100%;
+            font-size: 1.5rem;
+            font-weight: 1000;
+            text-align: center;
+        }
+
+        .product-modal-description{
+            color: #1e1e1e;
+            font-size: 0.8rem;
+        }
+    }
+
+    .product-modal-bar{
+        padding: 20px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        width: 70%;
+        background-color: #ffffff;
+        border-bottom-left-radius: 20px;
+        border-bottom-right-radius: 20px;
+
+        .product-modal-bar-price{
+            color: #ff0000;
+            font-size: 1.5rem;
+
+            .price-icon{
+                font-size: 1rem;
+            }
+        }
+
+        .product-modal-bar-add{
+            padding: 0.2rem 1rem;
+            background-color: #ffd500;
+            border-radius: 20px;
+        }
+    }
+}
+

@@ -2,6 +2,7 @@
   "usingComponents": {
     "navigation-bar": "/components/navigation-bar/navigation-bar",
     "cart-bar": "/components/cart-bar/cart-bar",
-    "shop-detail": "/components/shop-detail/shop-detail"
+    "shop-detail": "/components/shop-detail/shop-detail",
+    "product-modal": "/components/product-modal/product-modal"
   }
 }

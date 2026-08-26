@@ -1,2 +1,5 @@
+export * from "./categoryService"
+export * from "./dishService"
 export * from "./request"
+export * from "./setmealService"
 export * from "./userService"

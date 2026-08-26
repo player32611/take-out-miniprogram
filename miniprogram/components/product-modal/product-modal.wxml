@@ -1,0 +1,23 @@
+<!--components/product-modal/product-modal.wxml-->
+<view class="mask" bind:tap="handleCloseWrapper">
+    <scroll-view class="product-modal" wx:if="{{ record }}" catch:tap="noop" scroll-y >
+        <view class="product-modal-name">{{ record.name }}</view>
+        <image class="product-modal-image" src="{{ record.image }}" mode="widthFix"/>
+        <view class="product-modal-description">{{ record.description }}</view>
+        <view wx:if="{{ setmealDishes.length }}">包含以下内容：</view>
+        <view wx:for="{{ setmealDishes }}" wx:key="id">
+            <image class="product-modal-image" src="{{ item.image }}" mode="widthFix"/>
+            <view class="product-modal-name">{{ item.name }} ✖ {{ item.copies }}</view>
+            <view class="product-modal-description">{{ item.description }}</view>
+        </view>
+    </scroll-view>
+    <view class="product-modal-bar">
+        <view class="product-modal-bar-price">
+            <text class="price-icon">￥</text>
+            <text>{{ record.price }}</text>
+        </view>
+        <view class="product-modal-bar-add">
+            加入购物车
+        </view>
+    </view>
+</view>

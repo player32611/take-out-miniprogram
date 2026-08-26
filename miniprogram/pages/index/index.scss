@@ -16,7 +16,6 @@ page {
             height: 100%;
             width: 100%;
             background-color: #f8f8f8;
-            overflow: hidden;
 
             .list{
                 flex: 1;
@@ -33,10 +32,14 @@ page {
                     .category-list-item{
                         padding: 40rpx;
                         width: calc(100% - 40rpx * 2);
+                        font-size: 0.8rem;
                         text-align: center;
+                        background-color: #f8f8f8;
+                        transition: background-color ease 0.5s;
 
                         &.active{
                             background-color: #ffffff;
+                            font-weight: 1000;
                         }
                     }
                 }
@@ -48,13 +51,63 @@ page {
 
                     .product-list-item{
                         margin: 40rpx;
-                        height: 250rpx;
+                        display: grid;
+                        grid-template-columns: 200rpx auto;
+                        grid-template-rows: 1fr 2fr 1fr;
+                        column-gap: 10px;
+                        justify-items: start;
+                        height: 200rpx;
                         width: calc(100% - 40rpx * 2);
                         text-align: center;
-                        background-color: blue;
 
                         &.active{
                             background-color: #ffffff;
+                        }
+
+                        .product-list-item-image {
+                            grid-area: 1/1/4/2;
+                            height: 100%;
+                            width: 100%;
+                        }
+
+                        .product-list-item-name{
+                            font-weight: 1000;
+                        }
+
+                        .product-list-item-description{
+                            color: #1e1e1e;
+                            font-size: 0.8rem;
+                        }
+
+                        .product-list-item-bottom{
+                            align-self: flex-end;
+                            display: flex;
+                            justify-content: space-between;
+                            align-items: center;
+                            width: 100%;
+
+                            .product-list-item-price{
+                                color: #ff0000;
+
+                                .price-icon{
+                                    font-size: 0.8rem;
+                                }
+                            }
+    
+                            .product-list-item-add{
+                                padding: 0.3rem;
+                                height: 0.9rem;
+                                width: 0.9rem;
+                                background-color: #ffd500;
+                                border-radius: 0.75rem;
+                            }
+
+                            .product-list-item-select{
+                                padding: 0.2rem 0.5rem;
+                                background-color: #ffd500;
+                                border-radius: 0.75rem;
+                                font-size: 0.8rem;
+                            }
                         }
                     }
                 }
