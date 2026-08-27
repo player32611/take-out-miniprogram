@@ -1,3 +1,4 @@
+export * from "./addressBookService"
 export * from "./categoryService"
 export * from "./dishService"
 export * from "./request"

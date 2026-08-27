@@ -1,3 +1,8 @@
+<view class="user-bar">
+    <image class="icon" src="/styles/icon/user.svg" bind:tap="handleNavigateUserCenter" />
+    <text class="user-bar-text" bind:tap="handleNavigateUserCenter">个人中心</text>
+</view>
+
 <view class="container">
     <view class="menu">
         <shop-detail></shop-detail>

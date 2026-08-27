@@ -1,0 +1,47 @@
+/* pages/editAddress/editAddress.wxss */
+page{
+    background-color: #e6e6e6;
+}
+
+.container{
+    padding-top: 0;    
+
+    .input{
+        width: 100%;
+        font-size: 0.9rem;
+
+        .input-item {
+            margin: 2px 0;
+            padding: 1rem;
+            display: flex;
+            align-items: center;
+            background-color: #ffffff;
+
+            .input-item-title {
+                font-weight: 1000;
+            }
+        }
+
+        .input-consignee{
+
+        }
+
+        .input-label{
+            .input-label-tag{
+                margin: 0 0.5rem;
+                padding: 2px 5px;
+                border: 1px solid #dbdbdb;
+
+                &.active {
+                    background-color: skyblue;
+                }
+            }
+        }
+
+        .save-btn{
+            margin-top: 1rem;
+            width: 90%;
+            background-color: #ffcc00;
+        }
+    }
+}

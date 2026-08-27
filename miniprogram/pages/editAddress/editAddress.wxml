@@ -1,0 +1,41 @@
+<!--pages/editAddress/editAddress.wxml-->
+<navigation-bar title="新增收货地址" background="#2c2c2c"></navigation-bar>
+
+
+
+<view class="container">
+    <form class="input" bindsubmit="handleSave">
+        <view class="input-item input-consignee">
+            <text class="input-item-title">联系人：</text>
+            <input name="consignee" placeholder="请填写收货人的姓名" />
+            <radio-group name="sex">
+                <label>
+                    <radio value="男" />先生
+                </label>
+                <label>
+                    <radio value="女" />女士
+                </label>
+            </radio-group>
+        </view>
+        
+        <view class="input-item input-phone">
+            <text class="input-item-title">手机号：</text>
+            <input name="phone" placeholder="请填写收货人手机号码" />
+        </view>
+
+        <view class="input-item input-address">
+            <text class="input-item-title">收获地址：</text>
+            <input name="address" placeholder="请填写收货人手机号码" />
+        </view>
+
+        <view class="input-item input-label">
+            <text class="input-item-title">标签：</text>
+            <view wx:for="{{ ADDRESS_LABEL_LIST }}" wx:key="*this" 
+            class="input-label-tag {{ selectLabel === item ? 'active' : '' }}" bind:tap="handleClickLabel" data-label="{{ item }}">
+                {{ item }}
+            </view>
+        </view>
+
+        <button class="save-btn" form-type="submit">保存地址</button>
+    </form>
+</view>

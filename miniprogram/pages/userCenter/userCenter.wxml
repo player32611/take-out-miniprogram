@@ -1,0 +1,25 @@
+<!--pages/userCenter/userCenter.wxml-->
+<navigation-bar title="个人中心" background="#ffaa00" color="#ffffff"></navigation-bar>
+
+<view class="container">
+    <view class="user-info">
+        <image class="user-info-avatar" src="" mode=""/>
+        <text class="user-info-name">默认用户</text>
+    </view>
+    <view class="body">
+        <view class="tool" bind:tap="handleNavigateToAddress">
+            <view>
+                <image class="icon" src="/styles/icon/address.svg"/>
+                <text>地址管理</text>
+            </view>
+            <image class="icon" src="/styles/icon/right.svg"/>
+        </view>
+        <view class="tool">
+            <view>
+                <image class="icon" src="/styles/icon/order.svg"/>
+                <text>历史订单</text>
+            </view>
+            <image class="icon" src="/styles/icon/right.svg"/>
+        </view>
+    </view>
+</view>

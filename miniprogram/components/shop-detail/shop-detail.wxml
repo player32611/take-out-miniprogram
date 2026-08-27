@@ -1,4 +1,11 @@
 <!--components/shop-detail/shop-detail.wxml-->
 <view class="shop-detail">
-    <text>详情</text>
+    <view class="shop-detail-head">
+        <view class="shop-detail-head-name">{{ SHOP_INFO.NAME }}</view>
+    </view>
+    <view class="shop-detail-bottom">
+        <text class="shop-detail-bottom-detail">{{ SHOP_INFO.DETAIL }}</text>
+        <text class="shop-detail-bottom-address">{{ SHOP_INFO.ADDRESS }}</text>
+        <image class="shop-detail-bottom-phone" src="/styles/icon/phone.svg" bind:tap="handlePhone"/>
+    </view>
 </view>

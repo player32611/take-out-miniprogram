@@ -1,7 +1,10 @@
 {
   "pages": [
     "pages/index/index",
-    "pages/login/login"
+    "pages/login/login",
+    "pages/userCenter/userCenter",
+    "pages/address/address",
+    "pages/editAddress/editAddress"
   ],
   "window": {
     "navigationBarTextStyle": "black",

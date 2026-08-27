@@ -70,4 +70,8 @@ Page<IndexPageData, IndexPageMethods>({
     handleCloseProductModal(){
         this.setData({ productModalOpen: false })
     },
+
+    handleNavigateUserCenter(){
+        wx.navigateTo({url: "/pages/userCenter/userCenter"})
+    }
 })

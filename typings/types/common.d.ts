@@ -1,4 +1,21 @@
-import { CATEGORY_TYPE, STATUS, GENDER } from "../../miniprogram/utils/index";
+import { CATEGORY_TYPE, STATUS, GENDER, ADDRESS_LABEL, ADDRESS_TYPE } from "../../miniprogram/utils/index";
+
+export interface Address {
+    id: number;
+    userId: number;
+    consignee: string;
+    sex: Gender;
+    phone: string;
+    provinceCode: string;
+    provinceName: string;
+    cityCode: string;
+    cityName: string;
+    districtCode: string;
+    districtName: string;
+    detail: string;
+    label: string;
+    isDefault: AddressType;
+}
 
 export interface Category {
 	id: number;
@@ -109,3 +126,7 @@ export type Status = (typeof STATUS)[keyof typeof STATUS];
 export type CategoryType = (typeof CATEGORY_TYPE)[keyof typeof CATEGORY_TYPE];
 
 export type Gender = (typeof GENDER)[keyof typeof GENDER];
+
+export type AddressLabel = (typeof ADDRESS_LABEL)[keyof typeof ADDRESS_LABEL];
+
+export type AddressType = (typeof ADDRESS_TYPE)[keyof typeof ADDRESS_TYPE];

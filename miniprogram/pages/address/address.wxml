@@ -1,0 +1,7 @@
+<!--pages/address/address.wxml-->
+<navigation-bar title="地址管理" background="#2c2c2c"></navigation-bar>
+
+<view class="container">
+    <text>一个地址都没有哦</text>
+    <button class="add-address-button" bind:tap="handleAddAddress">+ 新增收货地址</button>
+</view>

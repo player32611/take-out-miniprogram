@@ -1,4 +1,5 @@
 export const BASE_URL = "http://localhost:8080"
+
 export const MESSAGE = {
     LOGIN_ERROR: "登录失败",
     LOGIN_LOADING: "登录中",
@@ -26,3 +27,22 @@ export const CATEGORY_TYPE = {
 	DISH: 1,
 	SETMEAL: 2,
 } as const;
+
+export const ADDRESS_LABEL = {
+    COMPANY: "公司",
+    HOME: "家",
+    SCHOOL: "学校"
+} as const;
+
+export const ADDRESS_TYPE = {
+    DEFAULT: 1,
+    NOT_DEFAULT: 0,
+}
+
+export const SHOP_INFO = {
+    NAME: "XXXXX",
+    DETAIL: "简介XXXXXXXXXXXXXXX",
+    ADDRESS: "地址XXXXXXXXXXXXXXX",
+}
+
+export const ADDRESS_LABEL_LIST = Object.values(ADDRESS_LABEL)

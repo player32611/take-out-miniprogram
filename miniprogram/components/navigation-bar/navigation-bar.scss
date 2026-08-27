@@ -1,5 +1,5 @@
 .weui-navigation-bar {
-  --weui-FG-0:rgba(0,0,0,.9);
+  --weui-FG-0:#ffffff;
   --height: 44px;
   --left: 16px;
 }
@@ -32,7 +32,7 @@
   padding-left: var(--left);
   display: flex;
   flex-direction: row;
-  align-items: flex-start;
+  align-items: center;
   height: 100%;
   box-sizing: border-box;
 }
