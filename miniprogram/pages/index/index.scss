@@ -77,6 +77,7 @@ page {
                         .product-list-item-description{
                             color: #1e1e1e;
                             font-size: 0.8rem;
+                            text-align: left;
                         }
 
                         .product-list-item-bottom{
@@ -110,6 +111,15 @@ page {
                             }
                         }
                     }
+                }
+
+                .product-list-empty{
+                    flex: 1;
+                    display: flex;
+                    justify-content: center;
+                    align-items: center;
+                    height: 50vh;
+                    text-align: center;
                 }
             }
         }

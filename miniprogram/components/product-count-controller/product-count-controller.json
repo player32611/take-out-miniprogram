@@ -1,0 +1,6 @@
+{
+  "component": true,
+  "usingComponents": {
+    "flavor-modal": "/components/flavor-modal/flavor-modal"
+  }
+}

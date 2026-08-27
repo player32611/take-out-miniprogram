@@ -1,0 +1,30 @@
+/* components/product-count-controller/product-count-controller.wxss */
+.product-select-controller {
+    padding: 0.2rem 0.5rem;
+    background-color: #ffaa00;
+    border-radius: 0.75rem;
+    font-size: 0.8rem;
+}
+
+.product-count-controller{
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-size: 0.8rem;
+
+    .icon{
+        padding: 0.3rem;
+        height: calc(0.9rem - 1px * 2);
+        width: calc(0.9rem - 1px * 2);
+        border: 1px solid #cdcdcd;
+        border-radius: 0.75rem;
+
+        &.product-list-item-reduce{
+            background-color: #ffffff;
+        }
+
+        &.product-list-item-add{
+            background-color: #ffaa00;
+        }
+    }
+}

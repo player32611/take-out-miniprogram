@@ -1,8 +1,8 @@
 <!--components/product-modal/product-modal.wxml-->
 <view class="mask" bind:tap="handleCloseWrapper">
-    <scroll-view class="product-modal" wx:if="{{ record }}" catch:tap="noop" scroll-y >
+    <scroll-view class="product-modal" wx:if="{{ record }}" catch:tap="noop" scroll-y>
         <view class="product-modal-name">{{ record.name }}</view>
-        <image class="product-modal-image" src="{{ record.image }}" mode="widthFix"/>
+        <image class="product-modal-image" src="{{ record.image }}" mode="aspectFill"/>
         <view class="product-modal-description">{{ record.description }}</view>
         <view wx:if="{{ setmealDishes.length }}">包含以下内容：</view>
         <view wx:for="{{ setmealDishes }}" wx:key="id">
@@ -17,7 +17,8 @@
             <text>{{ record.price }}</text>
         </view>
         <view class="product-modal-bar-add">
-            加入购物车
+            <product-count-controller record="{{ record }}" category="{{ category }}" >
+            </product-count-controller>
         </view>
     </view>
 </view>

@@ -1,0 +1,24 @@
+<!--components/flavor-modal/flavor-modal.wxml-->
+<view class="mask" catch:tap="handleClose">
+    <view class="flavor-modal" catch:tap="noop">
+        <view class="flavor-modal-title">{{ record.name }}</view>
+        <view class="flavor-modal-flavorItem" wx:for="{{ flavorsList }}" wx:for-index="i" wx:key="id">
+            <view class="flavor-name">{{ item.name }}</view>
+            <view class="flavor-list">
+                <view class="flavor-list-item {{ selectFlavor[i] === j ? 'active' : '' }}" wx:for="{{ item.value }}" wx:for-index="j" wx:key="*this" 
+                catch:tap="handleSelect" data-i="{{ i }}" data-j="{{ j }}">
+                    {{ item }}
+                </view>
+            </view>
+        </view>
+    </view>
+    <view class="flavor-modal-bar" catch:tap="noop">
+        <view class="flavor-modal-bar-price">
+            <text class="price-icon">￥</text>
+            <text>{{ record.price }}</text>
+        </view>
+        <view class="flavor-modal-bar-add" bind:tap="handleAdd">
+            加入购物车
+        </view>
+    </view>
+</view>

@@ -91,6 +91,19 @@ export interface SetmealDishVO {
     description: string;
 }
 
+export interface ShoppingCart {
+    id: number;
+    name: string;
+    image: string;
+    userId: number;
+    dishId: number | null;
+    setmealId: number | null;
+    dishFlavor: string | null;
+    number: number;
+    amount: number;
+    createTime: number;
+}
+
 export type Status = (typeof STATUS)[keyof typeof STATUS];
 
 export type CategoryType = (typeof CATEGORY_TYPE)[keyof typeof CATEGORY_TYPE];

@@ -1,0 +1,11 @@
+<view wx:if="{{ record.flavors.length }}" class="product-select-controller" catch:tap="handleSelectOpen">
+    选择规格
+</view>
+
+<view wx:else class="product-count-controller" >
+    <image wx:if="{{ count }}" class="icon product-list-item-reduce" src="/styles/icon/reduce.svg" catch:tap="handleReduceProduct"/>
+    <text wx:if="{{ count }}">{{ count }}</text>
+    <image class="icon product-list-item-add" src="/styles/icon/add.svg" catch:tap="handleAddProduct"/>
+</view>
+
+<flavor-modal wx:if="{{ flavorOpen }}" record="{{ record }}" bind:close="handleSelectClose"></flavor-modal>

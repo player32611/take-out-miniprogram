@@ -1,0 +1,44 @@
+<!--components/shopping-cart.wxml-->
+<view wx:if="{{ modalOpen }}" class="mask" bind:tap="handleCloseModal">
+    
+</view>
+
+
+<view class="cart-modal {{ modalOpen ? 'active' : '' }}">
+    <view class="cart-modal-bar">
+        <text class="cart-modal-bar-title">购物车</text>
+
+        <view class="cart-modal-bar-clear" bind:tap="handleClean">
+            <image class="icon" src="/styles/icon/delete.svg"/>
+            清空
+        </view>
+    </view>
+    <scroll-view wx:if="{{ cartData.length }}" class="cart-modal-list" scroll-y enable-flex>
+        <view wx:for="{{ cartData }}" wx:key="id" class="cart-modal-list-item">
+            <image class="item-image" src="{{ item.image }}" alt=" {{ item.name }}" mode="aspectFill" />
+            <view class="item-name">{{ item.name }}</view>
+            <view wx:if="{{ item.dishFlavor }}" class="item-flavor">{{ item.dishFlavor }}</view>
+            <view class="item-bottom">
+                <view class="item-bottom-price">
+                    <text class="price-icon">￥</text>
+                    <text>{{ item.amount }}</text>
+                </view>
+                <view class="item-bottom-count">
+                    <image class="icon item-reduce" src="/styles/icon/reduce.svg" 
+                    catch:tap="handleReduceProduct" data-record="{{ item }}"/>
+                    <text>{{ item.number }}</text>
+                    <image class="icon item-add" src="/styles/icon/add.svg" catch:tap="handleAddProduct" data-record="{{ item }}"/>
+                </view>
+            </view>
+        </view>
+        <view class="cart-modal-list-placeHolder"></view>
+    </scroll-view>
+    <view wx:else="" class="cart-modal-empty">空空如也</view>
+</view>
+
+<view class="cart-bar" bind:tap="handleOpenModal">
+    <image class="icon" src="/styles/icon/cart.svg"/>
+    <view wx:if="{{ totalPrice.length }}" >￥ {{ totalPrice }}</view>
+    <button wx:if="{{ totalPrice.length }}" class="cart-bar-finish">去结算</button>
+    <view wx:else class="cart-bar-placeHolder"></view>
+</view>

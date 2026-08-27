@@ -1,7 +1,7 @@
 // components/product-modal/product-modal.ts
 import { setmealDish } from "../../services/index";
 import { CATEGORY_TYPE } from "../../utils/index"
-import { ProductModalParams, ProductModalData, ProductModalMethods, CategoryType, DishVO, Setmeal } from "../../../typings/types/index"
+import { ProductModalParams, ProductModalData, ProductModalMethods, Category, DishVO, Setmeal } from "../../../typings/types/index"
 
 Component<ProductModalData, ProductModalParams, ProductModalMethods>({
 
@@ -10,20 +10,20 @@ Component<ProductModalData, ProductModalParams, ProductModalMethods>({
    */
   properties: {
     record: null,
-    type: null,
+    category: null,
   },
 
   /**
    * 组件的初始数据
    */
   data: {
-    CATEGORY_TYPE,
     setmealDishes: [],
   },
 
   observers: {
-    "record, type": function(record: DishVO | Setmeal | null, type: CategoryType) {
-        if(!record || type === CATEGORY_TYPE.DISH) return;
+    "record, category": function(record: DishVO | Setmeal | null, category: Category) {
+
+        if(!record || category.type === CATEGORY_TYPE.DISH) return;
         setmealDish({ id:record.id }).then(res => {
             this.setData({setmealDishes: res.data})
         })

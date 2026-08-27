@@ -43,6 +43,18 @@ export interface SetmealDishParams {
 
 export type SetmealDishResponse = SetmealDishVO[]
 
+export interface ShoppingCartAddParams {
+    dishFlavor?: string,
+    dishId?: number,
+    setmealId?: number
+}
+
+export interface ShoppingCartSubParams {
+    dishFlavor?: string,
+    dishId?: number,
+    setmealId?: number
+}
+
 export interface UserLoginResponse {
     id: number;
     openid: string;
