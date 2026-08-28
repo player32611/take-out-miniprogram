@@ -1,31 +1,41 @@
 <!--pages/editAddress/editAddress.wxml-->
-<navigation-bar title="新增收货地址" background="#2c2c2c"></navigation-bar>
-
-
+<navigation-bar title="{{ type === 'ADD' ? '新增' : '编辑'}}收货地址" background="#2c2c2c"></navigation-bar>
 
 <view class="container">
     <form class="input" bindsubmit="handleSave">
         <view class="input-item input-consignee">
             <text class="input-item-title">联系人：</text>
-            <input name="consignee" placeholder="请填写收货人的姓名" />
+            <input name="consignee" placeholder="请填写收货人的姓名" value="{{ initConsignee }}"/>
             <radio-group name="sex">
                 <label>
-                    <radio value="男" />先生
+                    <radio value="男" checked="{{ initSex === '男' }}"/>先生
                 </label>
                 <label>
-                    <radio value="女" />女士
+                    <radio value="女" checked="{{ initSex === '女' }}" />女士
                 </label>
             </radio-group>
         </view>
         
         <view class="input-item input-phone">
             <text class="input-item-title">手机号：</text>
-            <input name="phone" placeholder="请填写收货人手机号码" />
+            <input name="phone" placeholder="请填写收货人手机号码" value="{{ initPhone }}"/>
         </view>
 
         <view class="input-item input-address">
-            <text class="input-item-title">收获地址：</text>
-            <input name="address" placeholder="请填写收货人手机号码" />
+            <text class="input-item-title">收货地址：</text>
+            <view class="input-item-content">
+                <t-cell class="address-cascader" note="{{ cascaderNote }}" bind:click="showCascader" arrow></t-cell>
+                <t-cascader
+                    visible="{{ cascaderVisible }}"
+                    theme="tab"
+                    options="{{ ADDRESS_LIST }}"
+                    value="{{ initAddress }}"
+                    title="请选择地址"
+                    bind:change="onChange"
+                ></t-cascader>
+                <input name="detail" placeholder="详细地址（精确到门牌号）" value="{{ initDetail }}"/>
+            </view>
+            
         </view>
 
         <view class="input-item input-label">
@@ -37,5 +47,9 @@
         </view>
 
         <button class="save-btn" form-type="submit">保存地址</button>
+
+        <button class="delete-btn" wx:if="{{ type === 'EDIT' }}" bind:tap="handleDelete">删除地址</button>
     </form>
 </view>
+
+<t-dialog id="t-dialog" />

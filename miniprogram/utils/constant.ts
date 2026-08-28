@@ -6,10 +6,14 @@ export const MESSAGE = {
     LOGIN_SUCCESS: "登录成功",
     COMMON_LOADING: "加载中",
     ADD_SUCCESS: "添加成功",
+    ADD_LOADING: "添加中",
     ADD_ERROR: "添加失败",
     DELETE_SUCCESS: "删除成功",
     DELETE_LOADING: "删除中",
     DELETE_ERROR: "删除失败",
+    UPDATE_SUCCESS: "修改成功",
+    UPDATE_LOADING: "修改中",
+    UPDATE_ERROR: "修改失败",
     CART_ADD_FAILED_WITH_NO_SELECT: "请选择所有规格"
 }
 
@@ -33,6 +37,45 @@ export const ADDRESS_LABEL = {
     HOME: "家",
     SCHOOL: "学校"
 } as const;
+
+export const ADDRESS_LIST = [
+    {
+      value: "1",
+      label: "广东省",
+      children: [
+        {
+          value: "101",
+          label: "深圳市",
+          children: [
+                { value: "1001", label: "南山区" },
+                { value: "1002", label: "福田区" },
+          ],
+        },
+        {
+            value: "102",
+            label: "广州市",
+            children: [
+                { value: "1003", label: "天河区" },
+                { value: "1004", label: "越秀区" },
+          ],
+        },
+      ],
+    },
+    {
+      value: "2",
+      label: "江苏省",
+      children: [
+        {
+        value: "201",
+          label: "南京市",
+          children: [
+            { value: "2001", label: "鼓楼区" },
+            { value: "2002", label: "玄武区" },
+          ],
+        },
+      ],
+    },
+  ];
 
 export const ADDRESS_TYPE = {
     DEFAULT: 1,

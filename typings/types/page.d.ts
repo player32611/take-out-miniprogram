@@ -1,4 +1,4 @@
-import { AddressLabel, Category, DishVO, Setmeal } from "./common";
+import { AddressBook, AddressItem, AddressLabel, Category, DishVO, Gender, Setmeal } from "./common";
 
 export type DatasetEvent<T> = WechatMiniprogram.BaseEvent & {
     currentTarget: {
@@ -7,21 +7,40 @@ export type DatasetEvent<T> = WechatMiniprogram.BaseEvent & {
 }
 
 export interface AddressPageData {
-    
+    showSkeleton: boolean
+    addressList: AddressBook[]
 }
 
-export interface AddressPageParams {
+export interface AddressPageMethods {
+    handleRefresh: () => void
+    handleSetDefault: (e: DatasetEvent<{record: AddressBook}>) => void
+    handleEditAddress: (e: DatasetEvent<{id: number}>) => void
     handleAddAddress: () => void
+    noop: () => void
 }
 
 export interface EditAddressPageData {
+    type: "ADD" | "EDIT"
+    id: number | null,
+    ADDRESS_LIST: AddressItem[]
     ADDRESS_LABEL_LIST: AddressLabel[]
+    initConsignee: string
+    initSex: Gender | null
+    initPhone: string
+    initAddress: string
+    initDetail: string
     selectLabel: AddressLabel | null
+    selectAddress: {label: string, value: string}[]
+    cascaderVisible: boolean
+    cascaderNote: string
 }
 
-export interface EditAddressPageParams {
+export interface EditAddressPageMethods {
+    showCascader: () => void
+    onChange: (e: DatasetEvent) => void
     handleClickLabel: (e: DatasetEvent<{label: AddressLabel}>) => void
     handleSave: (e: WechatMiniprogram.FormSubmit) => void
+    handleDelete: () => void
 }
 
 export interface IndexPageDishVOItem extends DishVO{

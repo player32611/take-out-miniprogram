@@ -2,6 +2,35 @@
 <navigation-bar title="地址管理" background="#2c2c2c"></navigation-bar>
 
 <view class="container">
-    <text>一个地址都没有哦</text>
+    <view class="address-skeleton-container" wx:if="{{ showSkeleton }}">
+        <t-skeleton class="address-skeleton"  theme="text" animation="gradient" loading="true"></t-skeleton>
+        <t-skeleton class="address-skeleton"  theme="text" animation="gradient" loading="true"></t-skeleton>
+        <t-skeleton class="address-skeleton"  theme="text" animation="gradient" loading="true"></t-skeleton>
+        <t-skeleton class="address-skeleton"  theme="text" animation="gradient" loading="true"></t-skeleton>
+        <t-skeleton class="address-skeleton"  theme="text" animation="gradient" loading="true"></t-skeleton>
+    </view>    
+    <scroll-view wx:elif="{{ addressList.length }}" class="address-list" scroll-y>
+        <view class="address-list-item" wx:for="{{ addressList }}" wx:key="id">
+            <view class="list-item-head">
+                <view class="head-positon">
+                    <t-tag class="head-tag" variant="light" theme="primary">{{ item.label }}</t-tag>
+                    <text class="head-detail">{{ item.provinceName }}{{ item.cityName }}{{ item.districtName }}{{ item.detail }}</text>
+                </view>
+                <view class="head-info">
+                    <text>{{ item.consignee }}</text>
+                    <text>{{ item.sex }}士</text>
+                    <text>{{ item.phone }}</text>
+                </view>
+                <image class="head-edit" src="/styles/icon/edit.svg" bind:tap="handleEditAddress" data-id="{{ item.id }}"/>
+            </view>
+            <t-divider />
+            <view class="list-item-default" bind:tap="handleSetDefault" data-record="{{ item }}">
+                <view class="default-radio {{ item.isDefault ? 'active' : ''}}"></view>
+                <text>设为默认地址</text>
+            </view>
+        </view>
+        <view class="address-list-empty"></view>
+    </scroll-view>
+    <text wx:else >一个地址都没有哦</text>
     <button class="add-address-button" bind:tap="handleAddAddress">+ 新增收货地址</button>
 </view>

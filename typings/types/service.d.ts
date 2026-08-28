@@ -29,8 +29,37 @@ export interface AddressBookAddParams {
     districtCode?: string;
     districtName?: string;
     detail: string;
-    label: string;
-    isDefault: AddressType;
+    label?: string;
+    isDefault?: AddressType;
+}
+
+export interface AddressBookSetDefaultParams {
+    id: number
+}
+
+export interface AddressBookIdParams {
+    id: number
+}
+
+export interface AddressBookDeleteParams {
+    id: number
+}
+
+export interface AddressBookUpdateParams {
+    id: number;
+    userId?: number;
+    consignee?: string;
+    sex: Gender;
+    phone: string;
+    provinceCode?: string;
+    provinceName?: string;
+    cityCode?: string;
+    cityName?: string;
+    districtCode?: string;
+    districtName?: string;
+    detail: string;
+    label?: string;
+    isDefault?: AddressType;
 }
 
 export interface CategoryListParams {

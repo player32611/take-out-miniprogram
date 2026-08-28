@@ -1,6 +1,6 @@
-import { CATEGORY_TYPE, STATUS, GENDER, ADDRESS_LABEL, ADDRESS_TYPE } from "../../miniprogram/utils/index";
+import { CATEGORY_TYPE, STATUS, GENDER, ADDRESS_LABEL, ADDRESS_TYPE, ADDRESS_LIST } from "../../miniprogram/utils/index";
 
-export interface Address {
+export interface AddressBook {
     id: number;
     userId: number;
     consignee: string;
@@ -13,7 +13,7 @@ export interface Address {
     districtCode: string;
     districtName: string;
     detail: string;
-    label: string;
+    label: AddressLabel;
     isDefault: AddressType;
 }
 
@@ -130,3 +130,5 @@ export type Gender = (typeof GENDER)[keyof typeof GENDER];
 export type AddressLabel = (typeof ADDRESS_LABEL)[keyof typeof ADDRESS_LABEL];
 
 export type AddressType = (typeof ADDRESS_TYPE)[keyof typeof ADDRESS_TYPE];
+
+export type AddressItem = (typeof ADDRESS_LIST)[keyof typeof ADDRESS_LIST];

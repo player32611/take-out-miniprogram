@@ -8,7 +8,7 @@ page{
 
     .input{
         width: 100%;
-        font-size: 0.9rem;
+        font-size: 0.8rem;
 
         .input-item {
             margin: 2px 0;
@@ -18,12 +18,29 @@ page{
             background-color: #ffffff;
 
             .input-item-title {
+                width: 5rem;
                 font-weight: 1000;
             }
         }
 
         .input-consignee{
 
+        }
+
+        .input-address {
+            align-items: start;
+
+            .input-item-content {
+                display: flex;
+                flex-direction: column;
+                width: 100%;
+
+                .address-cascader{
+                    padding: 0;
+                    width: 100%;
+                    background-color: #ffffff;
+                }
+            }
         }
 
         .input-label{
@@ -42,6 +59,12 @@ page{
             margin-top: 1rem;
             width: 90%;
             background-color: #ffcc00;
+        }
+
+        .delete-btn{
+            margin-top: 1rem;
+            width: 90%;
+            background-color: #ffffff;
         }
     }
 }

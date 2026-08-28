@@ -1,5 +1,8 @@
 {
   "usingComponents": {
-    "navigation-bar": "/components/navigation-bar/navigation-bar"
+    "navigation-bar": "/components/navigation-bar/navigation-bar",
+    "t-cell": "tdesign-miniprogram/cell/cell",
+    "t-cascader": "tdesign-miniprogram/cascader/cascader",
+    "t-dialog": "tdesign-miniprogram/dialog/dialog"
   }
 }

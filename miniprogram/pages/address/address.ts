@@ -1,13 +1,16 @@
-import { AddressPageData, AddressPageParams } from "../../../typings/types";
+import { AddressPageData, AddressPageMethods } from "../../../typings/types";
+import { addressBookList, addressBookSetDefault } from "../../services/index";
+import { MESSAGE } from "../../utils/index";
 
 // pages/address/address.ts
-Page<AddressPageData, AddressPageParams>({
+Page<AddressPageData, AddressPageMethods>({
 
   /**
    * 页面的初始数据
    */
   data: {
-
+    showSkeleton: true,
+    addressList: []
   },
 
   /**
@@ -28,7 +31,7 @@ Page<AddressPageData, AddressPageParams>({
    * 生命周期函数--监听页面显示
    */
   onShow() {
-
+    this.handleRefresh();
   },
 
   /**
@@ -66,7 +69,35 @@ Page<AddressPageData, AddressPageParams>({
 
   },
 
+  handleRefresh() {
+    addressBookList().then(res => {
+        this.setData({ addressList: res.data });
+    }).finally(() => {
+        this.setData({ showSkeleton: false})
+    })
+  },
+
+  handleSetDefault(e) {
+    const record = e.currentTarget.dataset.record
+    if(record.isDefault) return;
+    wx.showLoading({ title: MESSAGE.UPDATE_LOADING })
+    addressBookSetDefault({ id: record.id }).then(() => {
+        wx.hideLoading();
+        wx.showToast({ title: MESSAGE.UPDATE_SUCCESS, icon: "success"})
+        this.handleRefresh();
+    }).catch(() => {
+        wx.hideLoading();
+        wx.showToast({ title: MESSAGE.UPDATE_ERROR, icon: "error"})
+    })
+  },
+
+  handleEditAddress(e) {
+    wx.navigateTo({ url: `/pages/editAddress/editAddress?type=EDIT&id=${e.currentTarget.dataset.id}` })
+  },
+
   handleAddAddress() {
-    wx.navigateTo({ url: "/pages/editAddress/editAddress" })
-  }
+    wx.navigateTo({ url: "/pages/editAddress/editAddress?type=ADD" })
+  },
+
+  noop(){}
 })
