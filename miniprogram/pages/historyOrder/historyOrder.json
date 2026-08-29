@@ -1,0 +1,10 @@
+{
+    "enablePullDownRefresh": true,
+    "usingComponents": {
+        "navigation-bar": "/components/navigation-bar/navigation-bar",
+        "t-empty": "tdesign-miniprogram/empty/empty",
+        "t-tabs": "tdesign-miniprogram/tabs/tabs",
+        "t-tab-panel": "tdesign-miniprogram/tab-panel/tab-panel",
+        "t-typography-paragraph": "tdesign-miniprogram/paragraph/paragraph"
+    }
+}

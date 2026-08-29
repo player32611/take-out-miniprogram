@@ -1,0 +1,72 @@
+<!--pages/orderDetail/orderDetail.wxml-->
+<navigation-bar title="订单详情" background="#2c2c2c" color="#ffffff"></navigation-bar>
+
+<scroll-view class="container" scroll-y>
+    <view class="head">
+        <view class="head-title">等待支付</view>
+        <view class="head-info">等待支付: 14:50</view>
+        <view class="head-tools">
+            <button>取消订单</button>
+            <button style="background-color: #ffaa00;">立即支付</button>
+            <button>再来一单</button>
+        </view>
+    </view>
+
+    <view class="tip">
+        <image class="icon" src="/styles/icon/volume.svg"/>
+        <text>请在15分钟内完成支付，超时将自动取消</text>
+    </view>
+
+    <view class="body">
+        <text class="body-shopName">{{ SHOP_INFO.NAME }}</text>
+        <t-divider />
+        <view wx:for="{{ order.orderDetailList }}" wx:key="id" class="body-cart-item">
+            <image class="item-image" src="{{ item.image }}" alt=" {{ item.name }}" mode="aspectFill" />
+            <view class="item-nameAndPrice">
+                {{ item.name }}
+                <text class="item-price">￥{{ item.amount * item.number }}</text>
+            </view>
+            <view wx:if="{{ item.dishFlavor }}" class="item-flavor">{{ item.dishFlavor }}</view>
+            <view class="item-count">× {{ item.number }}</view>
+        </view>
+        <t-divider />
+        <view class="body-pack">
+            <text class="body-amount-title">打包费</text>
+            <text class="body-amount-price">￥ 3</text>
+        </view>
+        <view class="body-delivery">
+            <text class="body-amount-title">配送费</text>
+            <text class="body-amount-price">￥ 6</text>
+        </view>
+        <t-divider />
+        <view class="body-total">
+            <text class="body-total-title">合计</text>
+            <text class="body-total-price">￥{{ order.amount }}</text>
+        </view>
+    </view>
+
+    <view class="phone" bind:tap="handlePhone">
+        <image class="icon" src="/styles/icon/phone.svg"></image>
+        <text>联系商家</text>
+    </view>
+
+    <view class="bottom">
+        <t-cell title="期望时间" note="{{ order.number }}" style="padding: 10px 0;"/>
+        <t-cell title="联系方式" note="{{ order.consignee + ' ' + order.phone }}" style="padding: 10px 0;"/>
+        <t-cell title="配送地址" note="{{ order.address }}" style="padding: 10px 0;"/>
+    </view>
+
+    <view class="bottom">
+        <t-cell title="订单号码" note="{{ order.number }}" style="padding: 10px 0;"/>
+        <t-cell title="订单时间" note="{{ order.orderTime }}" style="padding: 10px 0;"/>
+        <t-cell title="支付方式" note="{{ order.payMethod === PAY_METHOD.WECHAT ? '微信支付' :
+        order.payMethod === PAY_METHOD.ALIPAY ? '支付宝支付' : '未知' }}" style="padding: 10px 0;"/>
+        <t-cell title="订单备注" note="{{ order.remark }}" style="padding: 10px 0;"/>
+
+        <t-cell wx:if="{{ order.tablewareStatus === TABLEWARE_STATUS.BYDISH }}" title="餐具数量" note="商家按餐量提供" style="padding: 10px 0;"/>
+        <t-cell wx:elif="{{ order.tablewareStatus === TABLEWARE_STATUS.SELECT }}" title="餐具数量" note="{{ order.tablewareNumber }}套" style="padding: 10px 0;"/>
+
+    </view>
+
+    <view class="empty"></view>
+</scroll-view>

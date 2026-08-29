@@ -1,7 +1,7 @@
 import { CartState, Listener } from "../../typings/types/index"
 
 const state: CartState = {
-    needRefresh: true,
+    needRefresh: false,
     cartData: []
 }
 

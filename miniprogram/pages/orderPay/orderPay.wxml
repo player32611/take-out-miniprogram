@@ -1,0 +1,65 @@
+<!--pages/orderPay/orderPay.wxml-->
+<navigation-bar title="提交订单" background="#2c2c2c"></navigation-bar>
+
+<scroll-view class="container" scroll-y>
+    <view class="head">
+        <view wx:if="{{ defaultAddress }}" class="head-defaultAddress" bind:tap="handleSetAddress">
+            <view class="address-head-positon">
+                <view>
+                    <t-tag class="address-head-tag" variant="light" theme="primary">{{ defaultAddress.label }}</t-tag>
+                    <text class="address-head-detail">{{ defaultAddress.provinceName }}{{ defaultAddress.cityName }}{{ defaultAddress.districtName }}{{ defaultAddress.detail }}</text>
+                </view>
+                <image class="address-head-edit" src="/styles/icon/right.svg"/>
+            </view>
+            <view class="address-head-info">
+                <text>{{ defaultAddress.consignee }}</text>
+                <text>{{ defaultAddress.sex }}士</text>
+                <text>{{ defaultAddress.phone }}</text>
+            </view>
+        </view>
+        <view wx:else class="head-setAddress">
+            <t-cell title="暂无默认地址，点击前往设置" hover arrow style="padding: 10px 0;" bind:tap="handleSetAddress"/>
+        </view>
+        <view class="head-time">
+            立即送出
+        </view>
+    </view>
+
+    <view class="body">
+        <text class="body-shopName">{{ SHOP_INFO.NAME }}</text>
+        <t-divider />
+        <view wx:for="{{ defaultCart }}" wx:key="id" class="body-cart-item">
+            <image class="item-image" src="{{ item.image }}" alt=" {{ item.name }}" mode="aspectFill" />
+            <view class="item-nameAndPrice">
+                {{ item.name }}
+                <text class="item-price">￥{{ item.amount * item.number }}</text>
+            </view>
+            <view wx:if="{{ item.dishFlavor }}" class="item-flavor">{{ item.dishFlavor }}</view>
+            <view class="item-count">× {{ item.number }}</view>
+        </view>
+        <t-divider />
+        <view class="body-pack">
+            <text class="body-amount-title">打包费</text>
+            <text class="body-amount-price">￥ 3</text>
+        </view>
+        <view class="body-delivery">
+            <text class="body-amount-title">配送费</text>
+            <text class="body-amount-price">￥ 6</text>
+        </view>
+        <t-divider />
+        <view class="body-total">
+            <text class="body-total-title">合计</text>
+            <text class="body-total-price">￥{{ totalAmount }}</text>
+        </view>
+    </view>
+
+    <view class="bottom">
+        <t-cell title="备注" hover arrow note="推荐使用无接触配送" style="padding: 10px 0;"/>
+        <t-cell title="餐具数量" hover arrow note="已在店选择：无需餐具" style="padding: 10px 0;"/>
+        <t-cell title="发票" hover arrow note="请联系商家提供" style="padding: 10px 0;"/>
+    </view>
+
+    <view class="empty"></view>
+</scroll-view>
+
+<shopping-cart type="readAble" bind:pay="handlePay"></shopping-cart>

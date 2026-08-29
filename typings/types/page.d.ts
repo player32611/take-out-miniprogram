@@ -1,4 +1,5 @@
-import { AddressBook, AddressItem, AddressLabel, Category, DishVO, Gender, Setmeal } from "./common";
+import { OrderVO } from ".";
+import { AddressBook, AddressItem, AddressLabel, Category, DeliveryStatus, DishVO, Gender, OrderStatus, Setmeal, ShoppingCart } from "./common";
 
 export type DatasetEvent<T> = WechatMiniprogram.BaseEvent & {
     currentTarget: {
@@ -43,6 +44,17 @@ export interface EditAddressPageMethods {
     handleDelete: () => void
 }
 
+export interface HistoryOrderPageData {
+    orderList: OrderHistoryVO[]
+    ORDER_STATUS: Object
+    selectStatus: OrderStatus
+}
+
+export interface HistoryOrderPageMethods {
+    handleChangeTabs: (e) => void
+    handleCheckOrder: (e: DatasetEvent<{id: number}>) => void
+}
+
 export interface IndexPageDishVOItem extends DishVO{
     key: string;
 }
@@ -66,10 +78,49 @@ export interface IndexPageMethods {
     handleNavigateUserCenter: () => void;
 }
 
+export interface OrderDetailPageData {
+    SHOP_INFO: Object,
+    PAY_METHOD: Object,
+    TABLEWARE_STATUS: Object,
+    order: OrderVO | null
+}
+
+export interface OrderDetailPageMethods {
+    handlePhone: () => void
+}
+
+export interface OrderPayPageData {
+    SHOP_INFO: Object,
+    defaultAddress: AddressBook | null
+    defaultDeliveryStatus: DeliveryStatus
+    defaultCart: ShoppingCart[]
+    defaultRemark: string;
+    defaultTablewareNumber: number,
+    totalAmount: number
+}
+
+export interface OrderPayPageMethods {
+    handleSetAddress: () => void;
+    handlePay: () => void;
+}
+
+export interface PayPageData {
+    SHOP_INFO: Object;
+    orderId: number | null;
+    orderAmount: number | null;
+    orderNumber: string;
+    orderTime: string;
+}
+
+export interface PayPageMethods {
+    handlePay: () => void;
+}
+
 export interface UserCenterPageData {
 
 }
 
 export interface UserCenterPageMethods {
     handleNavigateToAddress: () => void;
+    handleNavigateToHistory: () => void;
 }

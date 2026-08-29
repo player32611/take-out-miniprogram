@@ -1,0 +1,49 @@
+/* pages/pay/pay.wxss */
+page{
+    display: flex;
+    flex-direction: column;
+    height: 100vh;
+    background-color: #e6e6e6;
+}
+
+.container{
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    justify-content: start;
+    align-items: center;
+    flex: 1;
+
+    .order-info{
+        margin-bottom: 20px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+
+        .latest-time,
+        .info{
+            color: #707070;
+        }
+
+        .price{
+            margin: 5px 0;
+
+            text{
+                font-size: 2em;
+                font-weight: 1000;
+            }
+        }
+    }
+
+    .pay-method{
+        width: 90%;
+        --td-brand-color: #ffaa00;
+    }
+
+    .confirm{
+        position: absolute;
+        bottom: 20px;
+        width: 90%;
+        background-color: #ffaa00;
+    }
+}

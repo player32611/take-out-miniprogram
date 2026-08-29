@@ -1,5 +1,5 @@
 import { Gender } from "."
-import { AddressType, Category, DishVO, Setmeal, SetmealDishVO } from "./common"
+import { AddressType, Category, DeliveryStatus, DishVO, OrderDetail, Orders, OrderStatus, Setmeal, SetmealDishVO } from "./common"
 
 export interface Response<T = unknown> {
 	code: number;
@@ -15,6 +15,11 @@ export interface RequestOptions<T = unknown> {
 }
   
 export type HttpMethod = 'GET' | 'POST' | 'PUT' | 'DELETE'
+
+export interface PageResult<T = unknown> {
+	total: number;
+	records: T[];
+}
 
 export interface AddressBookAddParams {
     id?: number;
@@ -67,6 +72,40 @@ export interface CategoryListParams {
 }
 
 export type CategoryListResponse = Category[]
+
+export interface OrderSubmitParams {
+    addressBookId: number;
+    amount: number;
+    deliveryStatus: DeliveryStatus;
+    estimatedDeliveryTime: string;
+    packAmount: number;
+    payMethod: number;
+    remark: string;
+    tablewareNumber: number;
+    tablewareStatus: number;
+}
+
+export interface OrderSubmitResponse {
+    id: number;
+    orderAmount: number;
+    orderNumber: string;
+    orderTime: string;
+}
+
+export interface OrderHistoryParams {
+    page: number;
+    pageSize: number;
+    status?: OrderStatus
+}
+
+export interface OrderIdParams {
+    id: number
+}
+
+
+export interface OrderVO extends Orders{
+    orderDetailList: OrderDetail[]
+}
 
 export interface UserLoginParams {
     code: string

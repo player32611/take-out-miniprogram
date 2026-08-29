@@ -1,4 +1,4 @@
-import { CATEGORY_TYPE, STATUS, GENDER, ADDRESS_LABEL, ADDRESS_TYPE, ADDRESS_LIST } from "../../miniprogram/utils/index";
+import { CATEGORY_TYPE, STATUS, GENDER, ADDRESS_LABEL, ADDRESS_TYPE, ADDRESS_LIST, SHOP_INFO, DELIVERY_STATUS, ORDER_STATUS } from "../../miniprogram/utils/index";
 
 export interface AddressBook {
     id: number;
@@ -121,6 +121,69 @@ export interface ShoppingCart {
     createTime: number;
 }
 
+export interface Orders {
+      /** 主键 ID */
+  id: number;
+  /** 订单编号 */
+  number: string;
+  /** 状态 */
+  status: number;
+  /** 用户 ID */
+  userId: number;
+  /** 地址簿 ID */
+  addressBookId: number;
+  /** 下单时间 (图中为 string) */
+  orderTime: string;
+  /** 结账时间 (图中为 string) */
+  checkoutTime: string;
+  /** 支付方式 */
+  payMethod: number;
+  /** 支付状态 */
+  payStatus: number;
+  /** 金额 */
+  amount: number;
+  /** 备注 */
+  remark: string;
+  /** 用户名 (图中允许为 null) */
+  userName: string | null;
+  /** 手机号 */
+  phone: string;
+  /** 地址 */
+  address: string;
+  /** 收货人 */
+  consignee: string;
+  /** 取消原因 (允许为 null) */
+  cancelReason: string | null;
+  /** 拒绝原因 (允许为 null) */
+  rejectionReason: string | null;
+  /** 取消时间 (图中显示 null，允许为 null) */
+  cancelTime: string | null;
+  /** 预计送达时间 (图中为 string) */
+  estimatedDeliveryTime: string;
+  /** 配送状态 */
+  deliveryStatus: number;
+  /** 送达时间 (图中显示 null，允许为 null) */
+  deliveryTime: string | null;
+  /** 打包数量 */
+  packAmount: number;
+  /** 餐具数量 */
+  tablewareNumber: number;
+  /** 餐具状态 */
+  tablewareStatus: number;
+}
+
+export interface OrderDetail {
+    id: number;
+    name: string;
+    orderId: number;
+    dishId: number;
+    setmealId: number;
+    dishFlavor: string | null;
+    number: number;
+    amount: number;
+    image: string;
+}
+
 export type Status = (typeof STATUS)[keyof typeof STATUS];
 
 export type CategoryType = (typeof CATEGORY_TYPE)[keyof typeof CATEGORY_TYPE];
@@ -132,3 +195,9 @@ export type AddressLabel = (typeof ADDRESS_LABEL)[keyof typeof ADDRESS_LABEL];
 export type AddressType = (typeof ADDRESS_TYPE)[keyof typeof ADDRESS_TYPE];
 
 export type AddressItem = (typeof ADDRESS_LIST)[keyof typeof ADDRESS_LIST];
+
+export type ShopInfo = (typeof SHOP_INFO)[keyof typeof SHOP_INFO];
+
+export type DeliveryStatus = (typeof DELIVERY_STATUS)[keyof typeof DELIVERY_STATUS];
+
+export type OrderStatus = (typeof ORDER_STATUS)[keyof typeof ORDER_STATUS];

@@ -37,8 +37,15 @@
 </view>
 
 <view class="cart-bar" bind:tap="handleOpenModal">
-    <image class="icon" src="/styles/icon/cart.svg"/>
-    <view wx:if="{{ totalPrice.length }}" >￥ {{ totalPrice }}</view>
-    <button wx:if="{{ totalPrice.length }}" class="cart-bar-finish">去结算</button>
+    <view class="cart-bar-left">
+        <image class="icon" src="/styles/icon/cart.svg"/>
+        <view wx:if="{{ totalPrice.length }}">
+            ￥<text class="price">{{ totalPrice }}</text>
+        </view>
+        <view wx:else >
+            ￥<text class="price">0</text>
+        </view>
+    </view>
+    <button wx:if="{{ totalPrice.length }}" class="cart-bar-finish" catch:tap="handlePay">去{{ type === "changeAble" ? "结算" : "支付" }}</button>
     <view wx:else class="cart-bar-placeHolder"></view>
 </view>

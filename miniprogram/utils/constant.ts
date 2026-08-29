@@ -14,7 +14,8 @@ export const MESSAGE = {
     UPDATE_SUCCESS: "修改成功",
     UPDATE_LOADING: "修改中",
     UPDATE_ERROR: "修改失败",
-    CART_ADD_FAILED_WITH_NO_SELECT: "请选择所有规格"
+    CART_ADD_FAILED_WITH_NO_SELECT: "请选择所有规格",
+    LACK_DEFAULT_ADDRESS: "缺少地址"
 }
 
 export const STATUS = {
@@ -86,6 +87,32 @@ export const SHOP_INFO = {
     NAME: "XXXXX",
     DETAIL: "简介XXXXXXXXXXXXXXX",
     ADDRESS: "地址XXXXXXXXXXXXXXX",
+    PACK_AMOUNT: 3,
+    DELIVERY_AMOUNT: 6
+}
+
+export const DELIVERY_STATUS = {
+    IMMEDIATELY: 1,
+    SELECT: 0
+}
+
+export const TABLEWARE_STATUS = {
+    SELECT: 0,
+    BYDISH: 1
+}
+
+export const PAY_METHOD = {
+    WECHAT: 1,
+    ALIPAY: 2,
+}
+
+export const ORDER_STATUS = {
+    PENDING_PAYMENT: 1,
+    TO_BE_CONFIRMED: 2,
+    CONFIRMED: 3,
+    DELIVERY_IN_PROGRESS: 4,
+    COMPLETED: 5,
+    CANCELLED: 6
 }
 
 export const ADDRESS_LABEL_LIST = Object.values(ADDRESS_LABEL)

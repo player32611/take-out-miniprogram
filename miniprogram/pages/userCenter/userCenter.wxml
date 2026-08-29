@@ -14,7 +14,7 @@
             </view>
             <image class="icon" src="/styles/icon/right.svg"/>
         </view>
-        <view class="tool">
+        <view class="tool" bind:tap="handleNavigateToHistory">
             <view>
                 <image class="icon" src="/styles/icon/order.svg"/>
                 <text>历史订单</text>

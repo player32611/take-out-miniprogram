@@ -1,0 +1,17 @@
+<!--pages/pay/pay.wxml-->
+<navigation-bar title="支付订单" background="#2c2c2c"></navigation-bar>
+
+<view class="container">
+    <view class="order-info">
+        <view class="latest-time">支付剩余时间 {{ orderTime }}</view>
+        <view class="price">￥ <text>{{ orderAmount }}</text></view>
+        <view class="info">{{ SHOP_INFO.NAME }}-{{ orderNumber }}</view>
+    </view>
+    <view class="pay-method">
+        <t-radio-group default-value="wechat" borderless>
+            <t-radio class="pay-method-item" value="wechat" label="微信支付" placement="right" style="border-radius: 5px;"/>
+    </t-radio-group>
+
+    </view>
+    <button class="confirm" bind:tap="handlePay">确认支付</button>
+</view>

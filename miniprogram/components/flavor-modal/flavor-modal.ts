@@ -33,7 +33,6 @@ Component({
         const newData = [...this.data.selectFlavor];
         newData[e.target.dataset.i] = e.target.dataset.j;
         this.setData({ selectFlavor: newData })
-        console.log(newData)
     },
 
     handleAdd(){

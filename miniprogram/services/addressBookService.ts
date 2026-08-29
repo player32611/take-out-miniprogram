@@ -24,3 +24,7 @@ export const addressBookDelete = (params: AddressBookDeleteParams): Promise<Resp
 export const addressBookUpdate = (params: AddressBookUpdateParams): Promise<Response<void>> => {
     return put<void, AddressBookUpdateParams>({ url: "/user/addressBook", params})
 }
+
+export const addressBookGetDefault = (): Promise<Response<AddressBook>> => {
+    return get<AddressBook, void>({ url: "/user/addressBook/default"})
+}

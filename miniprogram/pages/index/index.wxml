@@ -1,6 +1,8 @@
 <view class="user-bar">
-    <image class="icon" src="/styles/icon/user.svg" bind:tap="handleNavigateUserCenter" />
-    <text class="user-bar-text" bind:tap="handleNavigateUserCenter">个人中心</text>
+    <view class="userCenter" bind:tap="handleNavigateUserCenter">
+        <image class="icon" src="/styles/icon/user.svg" />
+        <text class="user-bar-text">个人中心</text>
+    </view>
 </view>
 
 <view class="container">
@@ -32,7 +34,7 @@
     </view>
 </view>
 
-<shopping-cart></shopping-cart>
+<shopping-cart type="changeAble"></shopping-cart>
 
 <product-modal wx:if="{{ productModalOpen }}" record="{{ currentProduct }}" category="{{ selectCategory }}" bind:close="handleCloseProductModal"></product-modal>
   

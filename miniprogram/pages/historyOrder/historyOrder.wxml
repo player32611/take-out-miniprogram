@@ -1,0 +1,46 @@
+<!--pages/historyOrder/historyOrder.wxml-->
+<navigation-bar title="历史订单" background="#2c2c2c" color="#ffffff"></navigation-bar>
+
+<t-tabs defaultValue="{{ selectStatus }}" bind:change="handleChangeTabs">
+  <t-tab-panel label="全部订单" value="0" />
+  <t-tab-panel label="待付款" value="1" />
+  <t-tab-panel label="退款" value="6" />
+</t-tabs>
+
+<view class="container">
+    <t-empty wx:if="{{ orderList.length === 0}}" icon="info-circle-filled" description="暂无历史订单" style="margin: 50px;"/>
+    <scroll-view wx:else class="order-list" scroll-y>
+        <view wx:for="{{ orderList }}" wx:key="id" class="order-list-item" bind:tap="handleCheckOrder" data-id="{{ item.id }}">
+            <view class="item-head">
+                <text>{{ item.orderTime }}</text>
+                <text class="item-head-status">{{ 
+                    item.status === ORDER_STATUS.PENDING_PAYMENT ? "待付款" : 
+                    item.status === ORDER_STATUS.TO_BE_CONFIRMED ? "待接单" : 
+                    item.status === ORDER_STATUS.CONFIRMED ? "已接单" : 
+                    item.status === ORDER_STATUS.DELIVERY_IN_PROGRESS ? "派送中" : 
+                    item.status === ORDER_STATUS.COMPLETED ? "已完成" : 
+                    item.status === ORDER_STATUS.CANCELLED ? "已取消" : "未知"
+                 }}</text>
+            </view>
+
+            <view class="item-body">
+                <scroll-view class="item-body-dishList" scroll-x enable-flex>
+                    <view class="item-body-dishList-item" wx:for="{{ item.orderDetailList }}" wx:key="id">
+                        <image class="item-body-dishList-item-image" src="{{ item.image }}" mode="aspectFill"/>
+                        <t-typography-paragraph ellipsis content="{{ item.name }}" style="font-size: 0.8rem; margin: 0;color: #707070;;"/>
+                    </view>
+                    <view class="item-body-dishList-empty"></view>
+                </scroll-view >
+                <view class="item-body-dishInfo">
+                    <view>￥<text class="item-body-dishInfo-amount">{{ item.amount }}</text></view>
+                    <text class="item-body-dishInfo-number">共 {{ item.orderDetailList.length }} 件</text>
+                </view>
+            </view>
+
+            <view class="item-bottom">
+                <button>再来一单</button>
+                <button style="background-color: #ffaa00;">去支付</button>
+            </view>
+        </view>
+    </scroll-view>
+</view>

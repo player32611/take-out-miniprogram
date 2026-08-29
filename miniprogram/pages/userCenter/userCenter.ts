@@ -68,5 +68,9 @@ Page<UserCenterPageData, UserCenterPageMethods>({
 
   handleNavigateToAddress() {
     wx.navigateTo({ url: "/pages/address/address"})
-  }
+  },
+
+  handleNavigateToHistory() {
+    wx.navigateTo({ url: "/pages/historyOrder/historyOrder"})
+  },
 })

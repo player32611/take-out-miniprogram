@@ -8,7 +8,7 @@ Component({
    * 组件的属性列表
    */
   properties: {
-
+    type: "changeAble"
   },
 
   /**
@@ -27,7 +27,6 @@ Component({
    */
   methods: {
     handleUpdate(){
-        console.log("update")
         if(!cartStore.getState().needRefresh) return;
         cartStore.setState({needRefresh: false });
         shoppingCartList().then(res => {
@@ -42,7 +41,7 @@ Component({
     },
 
     handleOpenModal(){
-        this.setData({ modalOpen: true });
+        if(this.properties.type === "changeAble") this.setData({ modalOpen: true });
     },
 
     handleCloseModal(){
@@ -97,12 +96,27 @@ Component({
                 wx.showToast({title: MESSAGE.DELETE_ERROR, icon: "error"})
             })
         }
+    },
+
+    handlePay(){
+        if(this.properties.type === "changeAble") wx.navigateTo({ url: "/pages/orderPay/orderPay" });
+        else if(this.properties.type === "readAble") {
+            this.triggerEvent("pay")
+        }
     }
   },
 
   lifetimes: {
     attached(){
-        this.handleUpdate()
+        shoppingCartList().then(res => {
+            cartStore.setState({ cartData: res.data });
+            let price = 0;
+            res.data.forEach(item => {
+                price += item.amount * item.number;
+            })
+            if(price == 0) this.setData({ cartData: res.data, totalPrice: "" });
+            else this.setData({ cartData: res.data, totalPrice: price.toFixed(2) });
+        })
         this.unsubscribe = cartStore.subscribe(() => {
           this.handleUpdate()
         })
@@ -112,5 +126,5 @@ Component({
         this.unsubscribe?.();
         this.unsubscribe = null;
     }
-  }
+  },
 })

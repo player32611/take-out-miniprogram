@@ -4,7 +4,11 @@
     "pages/login/login",
     "pages/userCenter/userCenter",
     "pages/address/address",
-    "pages/editAddress/editAddress"
+    "pages/editAddress/editAddress",
+    "pages/orderPay/orderPay",
+    "pages/pay/pay",
+    "pages/historyOrder/historyOrder",
+    "pages/orderDetail/orderDetail"
   ],
   "window": {
     "navigationBarTextStyle": "black",
