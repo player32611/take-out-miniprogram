@@ -1,7 +1,9 @@
 {
+    "enablePullDownRefresh": true,
   "usingComponents": {
     "navigation-bar": "/components/navigation-bar/navigation-bar",
     "t-divider": "tdesign-miniprogram/divider/divider",
-    "t-cell": "tdesign-miniprogram/cell/cell"
+    "t-cell": "tdesign-miniprogram/cell/cell",
+    "t-dialog": "tdesign-miniprogram/dialog/dialog"
   }
 }

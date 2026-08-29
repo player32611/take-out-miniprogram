@@ -107,6 +107,10 @@ export interface OrderPayParams {
     payMethod: PayMethod
 }
 
+export interface OrderCancelParams {
+    id: number
+}
+
 export interface OrderPayResponse {
     estimatedDeliveryTime: string
 }

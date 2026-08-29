@@ -1,4 +1,4 @@
-import type { Response, OrderSubmitParams, OrderSubmitResponse, OrderHistoryParams, OrderIdParams, OrderPayParams, OrderPayResponse, PageResult, OrderVO } from "../../typings/types"
+import type { Response, OrderSubmitParams, OrderSubmitResponse, OrderHistoryParams, OrderIdParams, OrderPayParams, OrderPayResponse, OrderCancelParams, PageResult, OrderVO } from "../../typings/types"
 import { get, post, put } from "./request"
 
 export const orderSubmit = (params: OrderSubmitParams): Promise<Response<OrderSubmitResponse>> => {
@@ -15,4 +15,8 @@ export const orderId = (params: OrderIdParams): Promise<Response<OrderVO>> => {
 
 export const orderPay = (params: OrderPayParams): Promise<Response<OrderPayResponse>> => {
     return put<OrderPayResponse, OrderPayParams>({ url: "/user/order/payment", params})
+}
+
+export const orderCancel = (params: OrderCancelParams): Promise<Response<void>> => {
+    return put<void, OrderCancelParams>({ url: `/user/order/cancel/${params.id}` })
 }

@@ -12,7 +12,7 @@
          }}</view>
         <view wx:if="{{ order.status === ORDER_STATUS.PENDING_PAYMENT }}" class="head-info">等待支付: 14:50</view>
         <view class="head-tools">
-            <button wx:if="{{ order.status != ORDER_STATUS.CANCELLED && order.status != ORDER_STATUS.COMPLETED }}">取消订单</button>
+            <button wx:if="{{ order.status != ORDER_STATUS.CANCELLED && order.status != ORDER_STATUS.COMPLETED }}" bind:tap="handleCancel">取消订单</button>
             <button wx:if="{{ order.status === ORDER_STATUS.COMPLETED }}">申请退款</button>
             <button wx:if="{{ order.status === ORDER_STATUS.PENDING_PAYMENT }}" style="background-color: #ffaa00;">立即支付</button>
             <button wx:if="{{ order.status === ORDER_STATUS.TO_BE_CONFIRMED }}">催单</button>
@@ -78,3 +78,5 @@
 
     <view class="empty"></view>
 </scroll-view>
+
+<t-dialog id="t-dialog"/>

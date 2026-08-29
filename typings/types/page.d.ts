@@ -45,12 +45,13 @@ export interface EditAddressPageMethods {
 }
 
 export interface HistoryOrderPageData {
-    orderList: OrderHistoryVO[]
+    orderList: OrderVO[]
     ORDER_STATUS: Object
     selectStatus: OrderStatus
 }
 
 export interface HistoryOrderPageMethods {
+    handleRefresh: () => void
     handleChangeTabs: (e) => void
     handleCheckOrder: (e: DatasetEvent<{id: number}>) => void
 }
@@ -87,7 +88,9 @@ export interface OrderDetailPageData {
 }
 
 export interface OrderDetailPageMethods {
+    handleRefresh: () => void
     handlePhone: () => void
+    handleCancel: () => void
 }
 
 export interface OrderPayPageData {

@@ -34,7 +34,7 @@ Page<HistoryOrderPageData, HistoryOrderPageMethods>({
    * 生命周期函数--监听页面显示
    */
   onShow() {
-
+    this.handleRefresh();
   },
 
   /**
@@ -55,19 +55,7 @@ Page<HistoryOrderPageData, HistoryOrderPageMethods>({
    * 页面相关事件处理函数--监听用户下拉动作
    */
   onPullDownRefresh() {
-    if (this.data.selectStatus === 0){
-        orderHistory({ page: 1, pageSize: 10 }).then(res => {
-            this.setData({ orderList: res.data.records })
-        }).finally(() => {
-            wx.stopPullDownRefresh()
-        })
-    } else {
-        orderHistory({ page: 1, pageSize: 10, status: this.data.selectStatus }).then(res => {
-            this.setData({ orderList: res.data.records })
-        }).finally(() => {
-            wx.stopPullDownRefresh()
-        })
-    }
+    this.handleRefresh();
   },
 
   /**
@@ -82,6 +70,22 @@ Page<HistoryOrderPageData, HistoryOrderPageMethods>({
    */
   onShareAppMessage() {
 
+  },
+
+  handleRefresh(){
+    if (this.data.selectStatus === 0){
+        orderHistory({ page: 1, pageSize: 10 }).then(res => {
+            this.setData({ orderList: res.data.records })
+        }).finally(() => {
+            wx.stopPullDownRefresh()
+        })
+    } else {
+        orderHistory({ page: 1, pageSize: 10, status: this.data.selectStatus }).then(res => {
+            this.setData({ orderList: res.data.records })
+        }).finally(() => {
+            wx.stopPullDownRefresh()
+        })
+    }
   },
 
   handleChangeTabs(e){

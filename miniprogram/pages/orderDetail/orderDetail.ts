@@ -1,6 +1,7 @@
-import { OrderDetailPageData, OrderDetailPageMethods } from "../../../typings/types"
-import { orderId } from "../../services/index"
-import { SHOP_INFO, PAY_METHOD, TABLEWARE_STATUS, ORDER_STATUS } from "../../utils/index"
+import Dialog from 'tdesign-miniprogram/dialog';
+import type { OrderDetailPageData, OrderDetailPageMethods } from "../../../typings/types"
+import { orderCancel, orderId } from "../../services/index"
+import { SHOP_INFO, PAY_METHOD, TABLEWARE_STATUS, ORDER_STATUS, MESSAGE } from "../../utils/index"
 
 // pages/orderDetail/orderDetail.ts
 Page<OrderDetailPageData, OrderDetailPageMethods>({
@@ -21,12 +22,11 @@ Page<OrderDetailPageData, OrderDetailPageMethods>({
    */
   onLoad(options) {
     orderId({id: options.id}).then(res => {
-        console.log(res.data)
         this.setData({ order: {
             ...res.data,
             consignee: res.data.consignee[0] + "*".repeat(res.data.consignee.length - 1),
             phone: res.data.phone.replace(/^(.{3}).*(.{4})$/, "$1****$2"),
-     } })
+        }})
     })
   },
 
@@ -62,7 +62,7 @@ Page<OrderDetailPageData, OrderDetailPageMethods>({
    * 页面相关事件处理函数--监听用户下拉动作
    */
   onPullDownRefresh() {
-
+    this.handleRefresh();
   },
 
   /**
@@ -79,7 +79,42 @@ Page<OrderDetailPageData, OrderDetailPageMethods>({
 
   },
 
+  handleRefresh() {
+    orderId({id: this.data.order?.id}).then(res => {
+        wx.stopPullDownRefresh();
+        this.setData({ order: {
+            ...res.data,
+            consignee: res.data.consignee[0] + "*".repeat(res.data.consignee.length - 1),
+            phone: res.data.phone.replace(/^(.{3}).*(.{4})$/, "$1****$2"),
+        }})
+    })
+  },
+
   handlePhone() {
     console.log("联系商家")
+  },
+
+  handleCancel() {
+    Dialog.confirm({
+        context: this,
+        title: '取消订单',
+        closeOnOverlayClick: true,
+        content: '确定要取消该订单吗?',
+        confirmBtn: { content: '确定', theme: 'danger' },
+        cancelBtn: '取消',
+    })
+    .then(() => {
+        if(!this.data.order?.id) return;
+        wx.showLoading({ title: MESSAGE.DELETE_LOADING})
+        orderCancel({id: this.data.order?.id}).then(() => {
+            wx.hideLoading();
+            wx.showToast({ title: MESSAGE.CANCEL_SUCCESS, icon: "success"})
+            this.handleRefresh();
+        }).catch(() => {
+            wx.hideLoading();
+            wx.showToast({ title: MESSAGE.CANCEL_ERROR, icon: "error"})
+        })
+    })
+    .catch(() => {});
   }
 })

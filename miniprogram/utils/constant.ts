@@ -14,6 +14,8 @@ export const MESSAGE = {
     UPDATE_SUCCESS: "修改成功",
     UPDATE_LOADING: "修改中",
     UPDATE_ERROR: "修改失败",
+    CANCEL_SUCCESS: "取消成功",
+    CANCEL_ERROR: "取消失败",
     CART_ADD_FAILED_WITH_NO_SELECT: "请选择所有规格",
     LACK_DEFAULT_ADDRESS: "缺少地址"
 }

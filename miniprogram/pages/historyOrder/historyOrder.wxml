@@ -39,7 +39,7 @@
 
             <view class="item-bottom">
                 <button>再来一单</button>
-                <button style="background-color: #ffaa00;">去支付</button>
+                <button wx:if="{{ item.status === ORDER_STATUS.PENDING_PAYMENT}}" style="background-color: #ffaa00;">去支付</button>
             </view>
         </view>
     </scroll-view>
