@@ -1,4 +1,4 @@
-import { CATEGORY_TYPE, STATUS, GENDER, ADDRESS_LABEL, ADDRESS_TYPE, ADDRESS_LIST, SHOP_INFO, DELIVERY_STATUS, ORDER_STATUS } from "../../miniprogram/utils/index";
+import { CATEGORY_TYPE, STATUS, GENDER, ADDRESS_LABEL, ADDRESS_TYPE, ADDRESS_LIST, SHOP_INFO, DELIVERY_STATUS, ORDER_STATUS, PAY_METHOD } from "../../miniprogram/utils/index";
 
 export interface AddressBook {
     id: number;
@@ -201,3 +201,5 @@ export type ShopInfo = (typeof SHOP_INFO)[keyof typeof SHOP_INFO];
 export type DeliveryStatus = (typeof DELIVERY_STATUS)[keyof typeof DELIVERY_STATUS];
 
 export type OrderStatus = (typeof ORDER_STATUS)[keyof typeof ORDER_STATUS];
+
+export type PayMethod = (typeof PAY_METHOD)[keyof typeof PAY_METHOD];

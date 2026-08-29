@@ -40,11 +40,11 @@
         <t-divider />
         <view class="body-pack">
             <text class="body-amount-title">打包费</text>
-            <text class="body-amount-price">￥ 3</text>
+            <text class="body-amount-price">￥ {{ totalPack }}</text>
         </view>
         <view class="body-delivery">
             <text class="body-amount-title">配送费</text>
-            <text class="body-amount-price">￥ 6</text>
+            <text class="body-amount-price">￥ {{ SHOP_INFO.DELIVERY_AMOUNT }}</text>
         </view>
         <t-divider />
         <view class="body-total">
@@ -62,4 +62,4 @@
     <view class="empty"></view>
 </scroll-view>
 
-<shopping-cart type="readAble" bind:pay="handlePay"></shopping-cart>
+<shopping-cart type="readAble" total="{{ totalAmount }}" bind:pay="handlePay"></shopping-cart>

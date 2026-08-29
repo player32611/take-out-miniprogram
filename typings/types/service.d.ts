@@ -1,5 +1,5 @@
 import { Gender } from "."
-import { AddressType, Category, DeliveryStatus, DishVO, OrderDetail, Orders, OrderStatus, Setmeal, SetmealDishVO } from "./common"
+import { AddressType, Category, DeliveryStatus, DishVO, OrderDetail, Orders, OrderStatus, PayMethod, Setmeal, SetmealDishVO } from "./common"
 
 export interface Response<T = unknown> {
 	code: number;
@@ -100,6 +100,15 @@ export interface OrderHistoryParams {
 
 export interface OrderIdParams {
     id: number
+}
+
+export interface OrderPayParams {
+    orderNumber: string,
+    payMethod: PayMethod
+}
+
+export interface OrderPayResponse {
+    estimatedDeliveryTime: string
 }
 
 

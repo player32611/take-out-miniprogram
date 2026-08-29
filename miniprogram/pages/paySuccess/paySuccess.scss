@@ -1,0 +1,30 @@
+/* pages/paySuccess/paySuccess.wxss */
+
+.container{
+    gap: 20px;
+
+    .word{
+        color: #707070;
+    }
+
+    .time{
+        color: #ffaa00;
+    }
+
+    .tools{
+        display: flex;
+        gap: 20px;
+
+        button{
+            padding: 0 20px;
+
+            &.tool-back{
+                background-color: #ffffff;
+            }
+
+            &.tool-check{
+                background-color: #ffaa00;
+            }
+        }
+    }
+}

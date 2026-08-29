@@ -8,7 +8,8 @@ Component({
    * 组件的属性列表
    */
   properties: {
-    type: "changeAble"
+    type: "changeAble",
+    total: null
   },
 
   /**
@@ -127,4 +128,10 @@ Component({
         this.unsubscribe = null;
     }
   },
+
+  pageLifetimes: {
+    show(){
+        cartStore.setState({ needRefresh: true })
+    }
+  }
 })

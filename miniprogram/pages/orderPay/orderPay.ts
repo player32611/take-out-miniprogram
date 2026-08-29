@@ -15,6 +15,7 @@ Page<OrderPayPageData, OrderPayPageMethods>({
     defaultCart: [],
     defaultRemark: "无接触配送",
     defaultTablewareNumber: 1,
+    totalPack: 0,
     totalAmount: 0,
   },
 
@@ -41,11 +42,13 @@ Page<OrderPayPageData, OrderPayPageMethods>({
         if(res.data.length === 0) {
             wx.redirectTo({url: "/pages/index/index" })
         }
-        let total = 0
+        let total = SHOP_INFO.DELIVERY_AMOUNT;
+        let pack = 0;
         res.data.forEach(item => {
             total += item.amount * item.number
+            pack += SHOP_INFO.PACK_AMOUNT * item.number
         })
-        this.setData({ defaultCart: res.data, totalAmount: total })
+        this.setData({ defaultCart: res.data, totalPack: pack, totalAmount: total + pack })
     })
     addressBookGetDefault().then(res => {
         this.setData({ defaultAddress: res.data})
@@ -107,7 +110,7 @@ Page<OrderPayPageData, OrderPayPageMethods>({
         tablewareNumber: this.data.defaultTablewareNumber,
         tablewareStatus: TABLEWARE_STATUS.BYDISH
      }).then(res => {
-        wx.navigateTo({ url: `/pages/pay/pay?id=${res.data.id}&amount=${res.data.orderAmount}&number=${res.data.orderNumber}&time=${res.data.orderTime}` })
+        wx.redirectTo({ url: `/pages/pay/pay?id=${res.data.id}&amount=${res.data.orderAmount}&number=${res.data.orderNumber}&time=${res.data.orderTime}` })
     })
   }
 })

@@ -1,0 +1,12 @@
+<!--pages/paySuccess/paySuccess.wxml-->
+<navigation-bar title="下单成功" background="#2c2c2c"></navigation-bar>
+
+<view class="container">
+    <t-result theme="success" title="下单成功" />
+    <view class="word">预计<text class="time">12:00</text>到达</view>
+    <text class="word">后厨正在加紧制作中，请耐心等待~</text>
+    <view class="tools">
+        <button class="tool-back" bind:tap="handleBack">返回首页</button>
+        <button class="tool-check" bind:tap="handleCheck">查看订单</button>
+    </view>
+</view>

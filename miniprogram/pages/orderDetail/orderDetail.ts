@@ -1,6 +1,6 @@
 import { OrderDetailPageData, OrderDetailPageMethods } from "../../../typings/types"
 import { orderId } from "../../services/index"
-import { SHOP_INFO, PAY_METHOD, TABLEWARE_STATUS } from "../../utils/index"
+import { SHOP_INFO, PAY_METHOD, TABLEWARE_STATUS, ORDER_STATUS } from "../../utils/index"
 
 // pages/orderDetail/orderDetail.ts
 Page<OrderDetailPageData, OrderDetailPageMethods>({
@@ -12,6 +12,7 @@ Page<OrderDetailPageData, OrderDetailPageMethods>({
     SHOP_INFO,
     PAY_METHOD,
     TABLEWARE_STATUS,
+    ORDER_STATUS,
     order: null
   },
 

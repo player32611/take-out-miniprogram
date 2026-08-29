@@ -1,5 +1,6 @@
-import { PayPageData, PayPageMethods } from "../../../typings/types";
-import { SHOP_INFO } from "../../utils/index"
+import type { PayPageData, PayPageMethods } from "../../../typings/types";
+import { orderPay } from "../../services/index";
+import { PAY_METHOD, SHOP_INFO } from "../../utils/index"
 
 // pages/pay/pay.ts
 Page<PayPageData, PayPageMethods>({
@@ -78,7 +79,9 @@ Page<PayPageData, PayPageMethods>({
   },
 
   handlePay() {
-    console.log("pay")
+    orderPay({orderNumber: this.data.orderNumber, payMethod: PAY_METHOD.WECHAT }).then(() => {
+        wx.redirectTo({ url: "/pages/paySuccess/paySuccess" })
+    })
     // wx.requestPayment()
   }
 })

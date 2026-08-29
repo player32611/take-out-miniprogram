@@ -39,7 +39,10 @@
 <view class="cart-bar" bind:tap="handleOpenModal">
     <view class="cart-bar-left">
         <image class="icon" src="/styles/icon/cart.svg"/>
-        <view wx:if="{{ totalPrice.length }}">
+        <view wx:if="{{ total }}">
+            ￥<text class="price">{{ total }}</text>
+        </view>
+        <view wx:elif="{{ totalPrice.length }}">
             ￥<text class="price">{{ totalPrice }}</text>
         </view>
         <view wx:else >

@@ -82,6 +82,7 @@ export interface OrderDetailPageData {
     SHOP_INFO: Object,
     PAY_METHOD: Object,
     TABLEWARE_STATUS: Object,
+    ORDER_STATUS: Object,
     order: OrderVO | null
 }
 
@@ -96,6 +97,7 @@ export interface OrderPayPageData {
     defaultCart: ShoppingCart[]
     defaultRemark: string;
     defaultTablewareNumber: number,
+    totalPack: number,
     totalAmount: number
 }
 
@@ -114,6 +116,15 @@ export interface PayPageData {
 
 export interface PayPageMethods {
     handlePay: () => void;
+}
+
+export interface PaySuccessPageData {
+
+}
+
+export interface PaySuccessPageMethods {
+    handleBack: () => void;
+    handleCheck: () => void;
 }
 
 export interface UserCenterPageData {

@@ -3,16 +3,24 @@
 
 <scroll-view class="container" scroll-y>
     <view class="head">
-        <view class="head-title">等待支付</view>
-        <view class="head-info">等待支付: 14:50</view>
+        <view class="head-title">{{ order.status === ORDER_STATUS.PENDING_PAYMENT ? '等待支付' :
+            order.status === ORDER_STATUS.TO_BE_CONFIRMED ? '等待商户接单' :
+            order.status === ORDER_STATUS.CONFIRMED ? '商家已接单' :
+            order.status === ORDER_STATUS.DELIVERY_IN_PROGRESS ? '订单派送中' :
+            order.status === ORDER_STATUS.COMPLETED ? '订单已完成' :
+            order.status === ORDER_STATUS.CANCELLED ? '订单已取消' : '未知'
+         }}</view>
+        <view wx:if="{{ order.status === ORDER_STATUS.PENDING_PAYMENT }}" class="head-info">等待支付: 14:50</view>
         <view class="head-tools">
-            <button>取消订单</button>
-            <button style="background-color: #ffaa00;">立即支付</button>
+            <button wx:if="{{ order.status != ORDER_STATUS.CANCELLED && order.status != ORDER_STATUS.COMPLETED }}">取消订单</button>
+            <button wx:if="{{ order.status === ORDER_STATUS.COMPLETED }}">申请退款</button>
+            <button wx:if="{{ order.status === ORDER_STATUS.PENDING_PAYMENT }}" style="background-color: #ffaa00;">立即支付</button>
+            <button wx:if="{{ order.status === ORDER_STATUS.TO_BE_CONFIRMED }}">催单</button>
             <button>再来一单</button>
         </view>
     </view>
 
-    <view class="tip">
+    <view wx:if="{{ order.status === ORDER_STATUS.PENDING_PAYMENT }}" class="tip">
         <image class="icon" src="/styles/icon/volume.svg"/>
         <text>请在15分钟内完成支付，超时将自动取消</text>
     </view>
