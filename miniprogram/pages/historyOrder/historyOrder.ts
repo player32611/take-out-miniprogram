@@ -1,5 +1,5 @@
 import { HistoryOrderPageData, HistoryOrderPageMethods } from "../../../typings/types";
-import { orderHistory } from "../../services/index";
+import { orderHistory, orderRepetition } from "../../services/index";
 import { ORDER_STATUS } from "../../utils/index"
 
 // pages/historyOrder/historyOrder.ts
@@ -104,5 +104,11 @@ Page<HistoryOrderPageData, HistoryOrderPageMethods>({
 
   handleCheckOrder(e){
     wx.navigateTo({ url: `/pages/orderDetail/orderDetail?id=${e.currentTarget.dataset.id}`})
+  },
+
+  handleRepeatOrder(e){
+    orderRepetition({id: e.currentTarget.dataset.id}).then(() => {
+        wx.navigateTo({ url: "/pages/index/index" })
+    })
   }
 })

@@ -34,7 +34,7 @@
     </view>
 </view>
 
-<shopping-cart type="changeAble"></shopping-cart>
+<shopping-cart ></shopping-cart>
 
 <product-modal wx:if="{{ productModalOpen }}" record="{{ currentProduct }}" category="{{ selectCategory }}" bind:close="handleCloseProductModal"></product-modal>
   

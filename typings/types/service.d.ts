@@ -111,6 +111,10 @@ export interface OrderCancelParams {
     id: number
 }
 
+export interface OrderRepetitionParams {
+    id: number
+}
+
 export interface OrderPayResponse {
     estimatedDeliveryTime: string
 }

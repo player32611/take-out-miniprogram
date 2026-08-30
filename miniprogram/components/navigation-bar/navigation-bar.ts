@@ -62,7 +62,6 @@ Component({
         const rect = wx.getMenuButtonBoundingClientRect()
         const deviceInfo = wx.getDeviceInfo()
         const windowInfo = wx.getWindowInfo()
-      
         const isAndroid = deviceInfo.platform === 'android'
         const isDevtools = deviceInfo.platform === 'devtools'
       

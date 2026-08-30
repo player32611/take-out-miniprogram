@@ -45,7 +45,7 @@ Component({
         const type = this.data.category.type;
         if(type === CATEGORY_TYPE.DISH){
             shoppingCartAdd({ dishId: id }).then(() => {
-                cartStore.setState({needRefresh: true})
+                cartStore.setState({ needRefresh: true })
                 wx.showToast({title: MESSAGE.ADD_SUCCESS, icon: "success"})
             }).catch(()=>{
                 wx.showToast({title: MESSAGE.ADD_ERROR, icon: "error"})

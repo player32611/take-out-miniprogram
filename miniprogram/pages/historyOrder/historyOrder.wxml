@@ -38,7 +38,7 @@
             </view>
 
             <view class="item-bottom">
-                <button>再来一单</button>
+                <button catch:tap="handleRepeatOrder" data-id="{{ item.id }}">再来一单</button>
                 <button wx:if="{{ item.status === ORDER_STATUS.PENDING_PAYMENT}}" style="background-color: #ffaa00;">去支付</button>
             </view>
         </view>

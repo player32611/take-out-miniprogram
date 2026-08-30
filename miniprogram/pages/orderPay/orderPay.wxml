@@ -62,4 +62,12 @@
     <view class="empty"></view>
 </scroll-view>
 
-<shopping-cart type="readAble" total="{{ totalAmount }}" bind:pay="handlePay"></shopping-cart>
+<view class="cart-bar">
+    <view class="cart-bar-left">
+        <image class="icon" src="/styles/icon/cart.svg"/>
+        <view wx:if="{{ totalAmount }}">
+            ￥<text class="price">{{ totalAmount }}</text>
+        </view>
+    </view>
+    <button class="cart-bar-finish" bind:tap="handlePay">去支付</button>
+</view>

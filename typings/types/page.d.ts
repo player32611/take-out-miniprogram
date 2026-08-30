@@ -54,6 +54,7 @@ export interface HistoryOrderPageMethods {
     handleRefresh: () => void
     handleChangeTabs: (e) => void
     handleCheckOrder: (e: DatasetEvent<{id: number}>) => void
+    handleRepeatOrder: (e: DatasetEvent<{id: number}>) => void
 }
 
 export interface IndexPageDishVOItem extends DishVO{
@@ -91,6 +92,7 @@ export interface OrderDetailPageMethods {
     handleRefresh: () => void
     handlePhone: () => void
     handleCancel: () => void
+    handleRepeatOrder: () => void
 }
 
 export interface OrderPayPageData {
