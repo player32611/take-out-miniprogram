@@ -1,5 +1,5 @@
 import type { PayPageData, PayPageMethods } from "../../../typings/types";
-import { orderPay } from "../../services/index";
+import { orderId, orderPay } from "../../services/index";
 import { PAY_METHOD, SHOP_INFO } from "../../utils/index"
 
 // pages/pay/pay.ts
@@ -20,13 +20,10 @@ Page<PayPageData, PayPageMethods>({
    * 生命周期函数--监听页面加载
    */
   onLoad(options) {
-    const [datePart, timePart] = options.time.split(" ")
-    const [year, month, day] = datePart.split("-").map(Number)
-    const [hour, minute, second] = timePart.split(":").map(Number)
-
-    const date = new Date(year, month - 1, day, hour, minute, second)
-    
-    this.setData({ orderId: options.id, orderAmount: options.amount, orderNumber: options.number, orderTime: options.time })
+    if(!options.id) return;
+    orderId({id: Number(options.id)}).then(res => {
+        this.setData({ orderId: res.data.id, orderAmount: res.data.amount, orderNumber: res.data.number, orderTime: res.data.orderTime })
+    })
   },
 
   /**

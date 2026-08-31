@@ -39,7 +39,14 @@
 
             <view class="item-bottom">
                 <button catch:tap="handleRepeatOrder" data-id="{{ item.id }}">再来一单</button>
-                <button wx:if="{{ item.status === ORDER_STATUS.PENDING_PAYMENT}}" style="background-color: #ffaa00;">去支付</button>
+                <button wx:if="{{ item.status === ORDER_STATUS.PENDING_PAYMENT}}" style="background-color: #ffaa00;" 
+                catch:tap="handlePay" data-id="{{ item.id }}">
+                    去支付
+                </button>
+                <button wx:if="{{ item.status === ORDER_STATUS.TO_BE_CONFIRMED}}" style="background-color: #ffaa00;" 
+                catch:tap="handleReminder" data-id="{{ item.id }}">
+                    催单
+                </button>
             </view>
         </view>
     </scroll-view>

@@ -14,8 +14,8 @@
         <view class="head-tools">
             <button wx:if="{{ order.status != ORDER_STATUS.CANCELLED && order.status != ORDER_STATUS.COMPLETED }}" bind:tap="handleCancel">取消订单</button>
             <button wx:if="{{ order.status === ORDER_STATUS.COMPLETED }}">申请退款</button>
-            <button wx:if="{{ order.status === ORDER_STATUS.PENDING_PAYMENT }}" style="background-color: #ffaa00;">立即支付</button>
-            <button wx:if="{{ order.status === ORDER_STATUS.TO_BE_CONFIRMED }}">催单</button>
+            <button wx:if="{{ order.status === ORDER_STATUS.PENDING_PAYMENT }}" style="background-color: #ffaa00;" bind:tap="handlePay">立即支付</button>
+            <button wx:if="{{ order.status === ORDER_STATUS.TO_BE_CONFIRMED }}" style="background-color: #ffaa00;" bind:tap="handleReminder">催单</button>
             <button bind:tap="handleRepeatOrder">再来一单</button>
         </view>
     </view>

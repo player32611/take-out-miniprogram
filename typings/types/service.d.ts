@@ -102,6 +102,10 @@ export interface OrderIdParams {
     id: number
 }
 
+export interface OrderReminderParams {
+    id: number
+}
+
 export interface OrderPayParams {
     orderNumber: string,
     payMethod: PayMethod

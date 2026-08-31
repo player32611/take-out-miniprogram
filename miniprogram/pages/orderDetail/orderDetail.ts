@@ -1,6 +1,6 @@
 import Dialog from 'tdesign-miniprogram/dialog';
 import type { OrderDetailPageData, OrderDetailPageMethods } from "../../../typings/types"
-import { orderCancel, orderId, orderRepetition } from "../../services/index"
+import { orderCancel, orderId, orderRepetition, orderReminder } from "../../services/index"
 import { SHOP_INFO, PAY_METHOD, TABLEWARE_STATUS, ORDER_STATUS, MESSAGE } from "../../utils/index"
 
 // pages/orderDetail/orderDetail.ts
@@ -122,6 +122,18 @@ Page<OrderDetailPageData, OrderDetailPageMethods>({
     if(!this.data.order?.id) return;
     orderRepetition({id: this.data.order.id}).then(() => {
         wx.navigateTo({ url: "/pages/index/index" })
+    })
+  },
+
+  handlePay(){
+    if(!this.data.order?.id) return;
+    wx.navigateTo({ url: `/pages/pay/pay?id=${this.data.order.id}` })
+  },
+
+  handleReminder(){
+    if(!this.data.order?.id) return;
+    orderReminder({id: this.data.order.id}).then(() => {
+        wx.showToast({ title: "已催单" , icon: "success"})
     })
   }
 })

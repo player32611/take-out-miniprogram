@@ -1,5 +1,5 @@
 import { HistoryOrderPageData, HistoryOrderPageMethods } from "../../../typings/types";
-import { orderHistory, orderRepetition } from "../../services/index";
+import { orderHistory, orderReminder, orderRepetition } from "../../services/index";
 import { ORDER_STATUS } from "../../utils/index"
 
 // pages/historyOrder/historyOrder.ts
@@ -109,6 +109,16 @@ Page<HistoryOrderPageData, HistoryOrderPageMethods>({
   handleRepeatOrder(e){
     orderRepetition({id: e.currentTarget.dataset.id}).then(() => {
         wx.navigateTo({ url: "/pages/index/index" })
+    })
+  },
+
+  handlePay(e){
+    wx.navigateTo({ url: `/pages/pay/pay?id=${e.currentTarget.dataset.id}` })
+  },
+
+  handleReminder(e){
+    orderReminder({id: e.currentTarget.dataset.id}).then(() => {
+        wx.showToast({ title: "已催单" , icon: "success"})
     })
   }
 })

@@ -1,5 +1,6 @@
 // components/shop-detail/shop-detail.ts
-import { SHOP_INFO } from "../../utils/index"
+import { shopStatus } from "../../services/shopService"
+import { SHOP_INFO, STATUS } from "../../utils/index"
 
 Component({
 
@@ -15,6 +16,8 @@ Component({
    */
   data: {
     SHOP_INFO,
+    STATUS,
+    status: 0
   },
 
   /**
@@ -23,6 +26,14 @@ Component({
   methods: {
     handlePhone(){
         console.log("phone")
+    }
+  },
+
+  pageLifetimes: {
+    show(){
+        shopStatus().then(res => {
+            this.setData({ status: res.data })
+        })
     }
   }
 })

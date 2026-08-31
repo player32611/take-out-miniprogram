@@ -110,7 +110,7 @@ Page<OrderPayPageData, OrderPayPageMethods>({
         tablewareNumber: this.data.defaultTablewareNumber,
         tablewareStatus: TABLEWARE_STATUS.BYDISH
      }).then(res => {
-        wx.redirectTo({ url: `/pages/pay/pay?id=${res.data.id}&amount=${res.data.orderAmount}&number=${res.data.orderNumber}&time=${res.data.orderTime}` })
+        wx.redirectTo({ url: `/pages/pay/pay?id=${res.data.id}` })
     })
   }
 })

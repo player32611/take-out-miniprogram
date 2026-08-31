@@ -1,7 +1,11 @@
 <!--components/shop-detail/shop-detail.wxml-->
 <view class="shop-detail">
     <view class="shop-detail-head">
-        <view class="shop-detail-head-name">{{ SHOP_INFO.NAME }}</view>
+        <view class="shop-detail-head-name">
+            <text>{{ SHOP_INFO.NAME }}</text>
+            <t-tag class="margin-16" theme="success">{{ status === STATUS.ENABLED ? "营业中" : "打烊中" }}</t-tag>
+        </view>
+        
     </view>
     <view class="shop-detail-bottom">
         <text class="shop-detail-bottom-detail">{{ SHOP_INFO.DETAIL }}</text>
