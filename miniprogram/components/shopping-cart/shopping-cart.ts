@@ -1,5 +1,6 @@
-import { shoppingCartAdd, shoppingCartClean, shoppingCartList, shoppingCartSub } from "../../services/index";
-import { cartStore, MESSAGE } from "../../utils/index";
+import { IAppOption } from "../../../typings";
+import { shoppingCartAdd, shoppingCartClean, shoppingCartList, shoppingCartSub, shopStatus } from "../../services/index";
+import { cartStore, MESSAGE, STATUS } from "../../utils/index";
 
 // components/shopping-cart.ts
 Component({
@@ -15,9 +16,11 @@ Component({
    * 组件的初始数据
    */
   data: {
+    STATUS,
     modalOpen: false,
     cartData: [],
-    totalPrice: ""
+    totalPrice: "",
+    status: 0,
   },
 
   unsubscribe: null as (() => void) | null,
@@ -108,6 +111,11 @@ Component({
   pageLifetimes: {
     show(){
         cartStore.setState({ needRefresh: true })
+        shopStatus().then(res => {
+            const app = getApp<IAppOption>();
+            this.setData({ status: res.data })
+            app.globalData.status = res.data
+        })
         this.handleUpdate()
         this.unsubscribe = cartStore.subscribe(() => {
           this.handleUpdate()

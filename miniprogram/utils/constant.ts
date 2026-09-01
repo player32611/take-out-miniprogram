@@ -86,7 +86,7 @@ export const ADDRESS_TYPE = {
 }
 
 export const SHOP_INFO = {
-    NAME: "XXXXX",
+    NAME: "开源菜品购物",
     DETAIL: "简介XXXXXXXXXXXXXXX",
     ADDRESS: "地址XXXXXXXXXXXXXXX",
     PACK_AMOUNT: 1,

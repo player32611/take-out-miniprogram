@@ -12,11 +12,17 @@
 
     .shop-detail-head{
         display: grid;
-        grid-template-columns: 70px auto;
+        grid-template-columns: 50px auto;
         grid-template-rows: repeat(2, 1fr);
         align-items: center;
+        column-gap: 15px;
         height: 50%;
         border-bottom: 1px solid #e6e6e6;
+
+        .shop-detail-head-avatar{
+            grid-area: 1/1/3/2;
+            align-self: center;
+        }
 
         .shop-detail-head-name{
             grid-area: 1/2/2/3;
@@ -42,6 +48,9 @@
 
         .shop-detail-bottom-address{
             grid-area: 2/1/3/2;
+            display: flex;
+            align-items: center;
+            gap: 5px;
         }
 
         .shop-detail-bottom-phone{

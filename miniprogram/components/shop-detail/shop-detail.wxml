@@ -1,15 +1,19 @@
 <!--components/shop-detail/shop-detail.wxml-->
 <view class="shop-detail">
     <view class="shop-detail-head">
+        <t-avatar class="shop-detail-head-avatar" t-class-content="external-class-content">A</t-avatar>
         <view class="shop-detail-head-name">
             <text>{{ SHOP_INFO.NAME }}</text>
-            <t-tag class="margin-16" theme="success">{{ status === STATUS.ENABLED ? "营业中" : "打烊中" }}</t-tag>
+            <t-tag class="margin-16" theme="success">{{ status === STATUS.ENABLED ? "营业中" : "休息中" }}</t-tag>
         </view>
         
     </view>
     <view class="shop-detail-bottom">
         <text class="shop-detail-bottom-detail">{{ SHOP_INFO.DETAIL }}</text>
-        <text class="shop-detail-bottom-address">{{ SHOP_INFO.ADDRESS }}</text>
+        <view class="shop-detail-bottom-address">
+            <t-icon name="location-filled" size="30rpx" />
+            <text>{{ SHOP_INFO.ADDRESS }}</text>
+        </view>
         <image class="shop-detail-bottom-phone" src="/styles/icon/phone.svg" bind:tap="handlePhone"/>
     </view>
 </view>

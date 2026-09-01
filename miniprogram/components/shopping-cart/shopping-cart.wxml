@@ -38,7 +38,9 @@
 
 <view class="cart-bar" bind:tap="handleOpenModal">
     <view class="cart-bar-left">
-        <image class="icon" src="/styles/icon/cart.svg"/>
+        <t-badge class="icon" count="{{ cartData.length }}" offset="{{ [2, -2] }}">
+            <t-icon name="cart" size="48rpx"/>
+        </t-badge>
         <view wx:if="{{ totalPrice.length }}">
             ￥<text class="price">{{ totalPrice }}</text>
         </view>
@@ -48,4 +50,10 @@
     </view>
     <button wx:if="{{ totalPrice.length }}" class="cart-bar-finish" catch:tap="handlePay">去结算</button>
     <view wx:else class="cart-bar-placeHolder"></view>
+</view>
+
+<view wx:if="{{ status === STATUS.DISABLED }}" class="cart-bar-mask">
+    <view class="inner-mask">
+        <text>本店已打烊</text>
+    </view>
 </view>
