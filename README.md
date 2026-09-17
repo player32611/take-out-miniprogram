@@ -1,33 +1,93 @@
 # take-out-miniprogram
 
-外卖管理系统微信小程序端（C 端用户），用户可以通过小程序浏览菜品/套餐、加入购物车、下单支付、查看历史订单等。
+外卖系统微信小程序端（C 端用户），提供菜品/套餐浏览、多规格口味选择、购物车、下单支付、地址管理与历史订单等完整点餐流程。
+
+## 相关项目
+
+本项目是「外卖系统」的微信小程序端，配套仓库如下：
+
+| 仓库 | 说明 | 地址 |
+|------|------|------|
+| **take-out-miniprogram**（本项目） | 微信小程序端（C 端用户） | https://github.com/player32611/take-out-miniprogram |
+| **take-out-frontend** | 后台管理前端（管理端 Web） | https://github.com/player32611/take-out-frontend |
+| **take-out-backend** | 后端服务（提供统一 API） | https://github.com/player32611/take-out-backend |
 
 ## 技术栈
 
-- **框架**: 微信小程序原生框架（TypeScript + Sass）
-- **UI 组件库**: TDesign Miniprogram 1.16
-- **语言**: TypeScript（严格模式）
-- **渲染引擎**: Skyline（glass-easel 组件框架）
-- **构建工具**: 微信开发者工具（内置 TypeScript/Sass 编译）
+| 类别 | 技术 |
+|------|------|
+| 框架 | 微信小程序原生框架 |
+| 语言 | TypeScript（严格模式：`strict` / `strictNullChecks` / `noImplicitAny` / `noImplicitReturns` 等） |
+| 样式 | Sass（SCSS） |
+| UI 组件库 | TDesign Miniprogram `^1.16.0` |
+| 渲染引擎 | Skyline（glass-easel 组件框架） |
+| 状态管理 | 自研轻量发布订阅模式（`utils/cartStore.ts`） |
+| 构建工具 | 微信开发者工具（内置 TypeScript / Sass 编译插件） |
+
+## 项目亮点
+
+### 1. 严格的 TypeScript 类型体系
+
+- 建立独立的 `typings/` 类型层，按职责划分为 `common` / `component` / `page` / `service` / `utils` / `wx`，页面、组件、服务层均有专属类型。
+- 通过「常量推导字面量类型」实现单点维护：`type OrderStatus = (typeof ORDER_STATUS)[keyof typeof ORDER_STATUS]`，常量与类型自动保持一致，杜绝魔法数字。
+- 对微信原生 API（`wx.*`）做类型补全（`typings/types/wx/`），全链路类型安全。
+
+### 2. 泛型化请求封装
+
+`services/request.ts` 以 `request<TRequest, TResponse>` 泛型封装 `wx.request`，实现：
+
+- 自动从本地存储注入 `Authorization` 请求头；
+- 统一解析 `Response<T>` 结构，非 `code === 200` 自动弹 Toast 并 `reject`；
+- `401` 自动清除 token、提示登录过期并跳转登录页；
+- 对外提供类型安全的 `get` / `post` / `put` / `del` 语义化方法。
+
+### 3. 轻量的发布-订阅状态管理
+
+`utils/cartStore.ts` 通过发布-订阅模式解决跨组件购物车状态同步：
+
+- 组件通过 `cartStore.subscribe()` 订阅，`cartStore.setState()` 触发通知并返回取消监听函数；
+- 引入 `needRefresh` 标志位，避免购物车数据被重复请求；
+- 无需引入重型状态管理库，保持小程序包体积轻量。
+
+### 4. 服务层与视图层分离
+
+`services/` 按业务聚合为 9 个模块（用户、分类、菜品、套餐、购物车、订单、地址簿、店铺、请求封装），并通过 `index.ts` 统一导出，页面只依赖服务接口、不直接接触请求细节。
+
+### 5. Skyline 高性能渲染
+
+- 开启 Skyline 渲染引擎与 glass-easel 组件框架，配合 `navigationStyle: "custom"` 实现沉浸式自定义导航栏；
+- 开启 `lazyCodeLoading: "requiredComponents"` 按需注入组件，优化首屏加载性能。
+
+### 6. 多规格口味选择流程
+
+菜品支持甜味、温度、忌口、辣度等多规格口味：
+
+- 点击 `+` 时若有口味配置则弹出 `flavor-modal`；
+- 需选齐全部规格后才能加入购物车，口味以逗号拼接字符串提交后端。
+
+### 7. 店铺营业状态控制
+
+- 通过店铺状态 API 获取营业状态，存储于 `app.globalData.status` 与局部 data；
+- 打烊时购物车栏展示遮罩、禁止下单，保证前后端状态一致。
 
 ## 项目结构
 
 ```
 take-out-miniprogram/
-├── project.config.json              # 项目配置文件（appid: wxc2d8239866abe07a）
-├── tsconfig.json                    # TypeScript 配置
-├── typings/                         # 类型定义
+├── project.config.json              # 项目配置（appid: wxc2d8239866abe07a，Skyline 渲染）
+├── tsconfig.json                    # TypeScript 配置（严格模式）
+├── typings/                         # 类型定义层
 │   ├── index.d.ts                   # 全局类型（IAppOption）
 │   └── types/
 │       ├── index.d.ts               # 类型导出入口
-│       ├── common.d.ts              # 通用业务模型（AddressBook, Category, Dish, Orders, Setmeal 等）
+│       ├── common.d.ts              # 业务模型（AddressBook、Category、Dish、Orders、Setmeal 等）
 │       ├── component.d.ts           # 组件 Props/Data/Methods 类型
 │       ├── page.d.ts                # 页面 Data/Methods 类型
 │       ├── service.d.ts             # 请求/响应参数类型
 │       ├── utils.d.ts               # 工具类型
 │       └── wx/                      # 微信 API 类型补全
 └── miniprogram/                     # 小程序源码
-    ├── app.json                     # 小程序配置（10 个页面、自定义导航栏、Skyline 渲染）
+    ├── app.json                     # 小程序配置（10 个页面、自定义导航栏、Skyline）
     ├── app.ts                       # 应用入口（globalData 存储店铺状态）
     ├── app.scss                     # 全局样式
     ├── pages/                       # 页面
@@ -49,7 +109,7 @@ take-out-miniprogram/
     │   ├── flavor-modal/            # 口味选择弹窗
     │   └── navigation-bar/          # 自定义导航栏
     ├── services/                    # API 服务层
-    │   ├── request.ts               # HTTP 请求封装（wx.request + 401 自动跳转登录）
+    │   ├── request.ts               # HTTP 请求封装（泛型 + 401 自动跳转登录）
     │   ├── userService.ts           # 用户登录 API
     │   ├── categoryService.ts       # 分类列表 API
     │   ├── dishService.ts           # 菜品列表 API
@@ -97,29 +157,18 @@ take-out-miniprogram/
 ### 请求封装
 
 在 `services/request.ts` 中统一封装 `wx.request`：
+
 - 自动从 `wx.getStorageSync("authorization")` 读取 token，注入请求头 `Authorization`
-- 401 响应自动清除 token 并跳转登录页
-- 统一解析 `Response` 格式，非 200 code 自动弹 Toast 提示
+- `401` 响应自动清除 token 并跳转登录页
+- 统一解析 `Response` 格式，非 `200` code 自动弹 Toast 提示
 
 ### 购物车状态管理
 
 使用发布订阅模式实现购物车状态同步（`utils/cartStore.ts`）：
+
 - 购物车数据变更通过 `cartStore.setState()` 触发通知
 - 多个组件（shopping-cart、product-count-controller）通过 `cartStore.subscribe()` 订阅更新
 - 设置 `needRefresh` 标志位避免重复请求
-
-### 口味选择流程
-
-菜品支持多规格口味选择（甜味、温度、忌口、辣度）：
-- 点击商品 `+` 按钮，若菜品有口味配置则弹出 `flavor-modal`
-- 用户选择全部口味规格后才能加入购物车
-- 口味信息以逗号拼接的字符串传递给后端
-
-### 店铺状态控制
-
-- 通过 `shopStatus` API 获取店铺营业状态
-- 状态存储在 `app.globalData.status` 和局部组件 data 中
-- 打烊时购物车栏显示遮罩，禁止下单
 
 ### 登录流程
 
@@ -153,17 +202,9 @@ export const BASE_URL = "http://localhost:8080"
 
 1. 用微信开发者工具打开项目根目录
 2. 在工具中设置 `appid: wxc2d8239866abe07a`（或替换为你的 appid）
-3. 点击"编译"或"预览"
+3. 点击「编译」或「预览」
 
-## 数据流
-
-```
-用户操作 → 组件事件 → Service API → 后端接口
-                          ↓
-                    cartStore.setState()
-                          ↓
-                    subscribe 组件更新 UI
-```
+> 需先启动 [take-out-backend](https://github.com/player32611/take-out-backend) 后端服务，小程序才能正常请求接口。
 
 ## 后端 API 依赖
 
